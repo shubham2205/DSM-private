@@ -4,7 +4,7 @@ import React from "react";
 
 const AllBarndHoverCrad = ({ data }) => {
   // console.log("brands", data);
-
+  
   return (
     <div className="my-5 bg-white py-10 grid place-items-center ">
       <div className="flex flex-wrap justify-center items-center gap-4">

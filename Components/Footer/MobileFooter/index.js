@@ -10,7 +10,7 @@ import { IoMdClose, IoMdHeartEmpty } from "react-icons/io";
 import { BiSolidUserCircle } from "react-icons/bi";
 import { LiaSignOutAltSolid } from "react-icons/lia";
 import Link from "next/link";
-import Drawer from "@/Components/Drawer";
+import Drawer from "../../Drawer";
 // import PanelSidebar from "@/Components/PanelSidebar";
 
 const MobileStickyFooter = () => {

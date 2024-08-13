@@ -1,12 +1,10 @@
 "use client";
-
+import OurBlogCards from "@/components/Cards/OurBlogCards/OurBlogCards";
 import React from "react";
 import useSWR from "swr";
-import OurBlogCards from "../../../../Components/Cards/OurBlogCards";
-
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
-const Blog = () => {
+const OurBlogSection = () => {
   const { data: blogData, error: blogError } = useSWR(
     `${process.env.NEXT_PUBLIC_API}/v3/blogs`,
     fetcher
@@ -14,6 +12,7 @@ const Blog = () => {
 
   if (blogError) return <div>failed to load</div>;
   if (!blogData && !blogError) return <div>loading...</div>;
+
   return (
     <div className="bg-defaultBg w-full my-5">
       <OurBlogCards datas={blogData?.data} />
@@ -21,4 +20,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default OurBlogSection;

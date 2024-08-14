@@ -77,7 +77,7 @@ export default function Home() {
   //   console.log("Data fetched - ", homeData, featuredData, todayDeal, top12brands, topCategories);
   // }, [homeData, featuredData, todayDeal, top12brands, topCategories]);
 
-  console.log(homeData, "HHoommee DDaattaa")
+  // console.log(homeData, "HHoommee DDaattaa")
   
     return (
       <main>

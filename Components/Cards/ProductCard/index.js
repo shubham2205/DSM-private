@@ -2,7 +2,8 @@ import React from "react";
 import { LiaHeart } from "react-icons/lia";
 import { LiaShoppingCartSolid } from "react-icons/lia";
 import Image from "next/image";
-import RatingStar from "@/components/RatingStar/RatingStar";
+import RatingStar from "../../RatingStar";
+// import RatingStar from "@/components/RatingStar/RatingStar";
 
 const ProductCard = ({ cardData, wid }) => {
   // console.log(typeof cardData?.rating)

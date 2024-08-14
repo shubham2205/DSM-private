@@ -1,12 +1,9 @@
-"use client"
-
-
 import React, { useState } from "react";
-// import CartStep from "./CartStep";
-// import ShippingStep from "./ShippingStep";
-// import DeliveryStep from "./DeliveryStep";
-// import PaymentStep from "./PaymentStep";
-// import ConfirmationStep from "./ConfirmationStep";
+import CartStep from "./CartStep";
+import ShippingStep from "./ShippingStep";
+import DeliveryStep from "./DeliveryStep";
+import PaymentStep from "./PaymentStep";
+import ConfirmationStep from "./ConfirmationStep";
 import {
   LiaShoppingCartSolid,
   LiaTruckSolid,
@@ -15,13 +12,8 @@ import {
 } from "react-icons/lia";
 import { ImMap2 } from "react-icons/im";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import CartStep from "../../../../Components/Stepper/CartStep";
-import ShippingStep from "../../../../Components/Stepper/ShippingStep";
-import DeliveryStep from "../../../../Components/Stepper/DeliveryStep";
-import PaymentStep from "../../../../Components/Stepper/PaymentStep";
-import ConfirmationStep from "../../../../Components/Stepper/ConfirmationStep";
 
-const Checkout = () => {
+const Stepper = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
   const steps = [
@@ -145,5 +137,4 @@ const Checkout = () => {
   );
 };
 
-
-export default Checkout
+export default Stepper;

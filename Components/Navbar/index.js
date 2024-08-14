@@ -204,9 +204,12 @@ const Navbar = () => {
                     <p className="flex -mb-[0.1rem] items-center justify-center h-[1.13rem] w-[1.50rem] text-sm text-white bg-primary-red rounded-full">
                       0
                     </p>
-                    <span className="text-sm text-light-gray-header">
-                      Wishlist
-                    </span>
+
+                    <Link href={"/wishlists"}>
+                      <span className="text-sm text-light-gray-header">
+                        Wishlist
+                      </span>
+                    </Link>
                   </div>
                 </div>
 
@@ -301,7 +304,7 @@ const Navbar = () => {
                           Login
                         </li>
                       </Link>
-                      <Link href={`/registration`}>
+                      <Link href={`/users/registration`}>
                         <li className="px-2 py-2 hover:bg-primary-red hover:text-white">
                           Registration
                         </li>

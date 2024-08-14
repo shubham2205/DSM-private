@@ -24,13 +24,13 @@ const NavTabs = () => {
           <Link href="/">Special Offers</Link>
         </li>
         <li>
-          <Link href="/bulkorder">Bulk Order</Link>
+          <Link href="/bulk-order">Bulk Order</Link>
         </li>
         <li>
-          <Link href="/trackorder">Track Order</Link>
+          <Link href="/track-your-order">Track Order</Link>
         </li>
         <li>
-          <Link href="/videogallery">Video Gallery</Link>
+          <Link href="/video-gallery">Video Gallery</Link>
         </li>
       </ul>
     </div>

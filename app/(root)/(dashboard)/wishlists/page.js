@@ -1,16 +1,29 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import React, { useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
 import { LiaShoppingCartSolid } from "react-icons/lia";
-import Modal from "../../../../Components/Modal";
-import PanelSidebar from "../../../../Components/MyPanel/PanelSidebar";
-import AddToCartPopUp from "../../../../Components/AddToCartPopUp";
-import RatingStar from "../../../../Components/RatingStar";
+
+const Modal = dynamic(() => import("../../../../Components/Modal"), {
+  ssr: false,
+});
+const PanelSidebar = dynamic(
+  () => import("../../../../Components/MyPanel/PanelSidebar"),
+  { ssr: false }
+);
+const AddToCartPopUp = dynamic(
+  () => import("../../../../Components/AddToCartPopUp"),
+  { ssr: false }
+);
+const RatingStar = dynamic(() => import("../../../../Components/RatingStar"), {
+  ssr: false,
+});
 
 const Wishlists = () => {
   const [isAddToCartPppUp, setIsAddToCartPppUp] = useState(false);
+
   return (
     <>
       <Modal
@@ -23,7 +36,6 @@ const Wishlists = () => {
       </Modal>
       <div className="flex sm:px-14 mt-12 gap-6">
         <PanelSidebar />
-
         <section className="w-full  xl:w-4/5 h-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             <div className="py-2 ">

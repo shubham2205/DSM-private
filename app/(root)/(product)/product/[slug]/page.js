@@ -1,3 +1,4 @@
+"use client";
 // import React from 'react'
 
 // const ProductDetails = () => {
@@ -615,10 +616,6 @@
 
 // export default ProductDetails;
 
-
-
-"use client";
-
 import { useParams } from "next/navigation";
 import React from "react";
 import useSWR from "swr";
@@ -627,7 +624,7 @@ import ProductDetail from "../../../../../Components/ProductDetail";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Product = () => {
-  const { id } = useParams();  
+  const { id } = useParams();
 
   const {
     data: productDetailData,

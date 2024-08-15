@@ -1,6 +1,4 @@
-
-"use client"
-
+"use client";
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -8,7 +6,6 @@ import { IoMdEyeOff } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "../../../../../Components/Modal";
-
 
 const Registration = () => {
   const [useEmail, setUseEmail] = useState(false);
@@ -327,7 +324,4 @@ const Registration = () => {
   );
 };
 
-
-
-
-export default Registration
+export default Registration;

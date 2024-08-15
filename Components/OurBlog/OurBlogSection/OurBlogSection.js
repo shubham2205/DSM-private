@@ -1,7 +1,7 @@
 "use client";
-import OurBlogCards from "@/components/Cards/OurBlogCards/OurBlogCards";
 import React from "react";
 import useSWR from "swr";
+import OurBlogCards from "../../Cards/OurBlogCards";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 const OurBlogSection = () => {

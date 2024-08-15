@@ -11,7 +11,6 @@ import { BiSolidUserCircle } from "react-icons/bi";
 import { LiaSignOutAltSolid } from "react-icons/lia";
 import Link from "next/link";
 import Drawer from "../../Drawer";
-// import PanelSidebar from "@/Components/PanelSidebar";
 
 const MobileStickyFooter = () => {
   const [isOpen, setIsOpen] = useState(false);

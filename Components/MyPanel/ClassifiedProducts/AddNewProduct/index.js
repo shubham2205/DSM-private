@@ -1,7 +1,9 @@
-import Modal from "@/components/Modal/Modal";
+"use client";
+
 import Image from "next/image";
 import React, { useState } from "react";
 import { IoMdCheckmark } from "react-icons/io";
+import Modal from "../../../Modal";
 
 const AddNewProduct = () => {
   const [isAddNewProduct, setIsAddNewProduct] = useState(false);
@@ -29,7 +31,10 @@ const AddNewProduct = () => {
               </div>
 
               <div className="flex justify-end gap-3">
-                <button onClick={()=>setIsAddNewProduct(false)} className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 focus:outline-none focus:shadow-outline">
+                <button
+                  onClick={() => setIsAddNewProduct(false)}
+                  className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 focus:outline-none focus:shadow-outline"
+                >
                   Cancel
                 </button>
                 <button className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline">

@@ -1,4 +1,3 @@
-// import BestSellerCard from "@/components/Cards/BestSellerCard/BestSellerCard";
 import React from "react";
 import BestSellerCard from "../../Cards/BestSellerCard";
 

@@ -1,11 +1,12 @@
+"use client";
+
 import React, { useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
 import { LiaEye } from "react-icons/lia";
 import { TfiDownload } from "react-icons/tfi";
 import PanelSidebar from "../PanelSidebar/PanelSidebar";
-import Modal from "@/components/Modal/Modal";
-import TrackOrderStepper from "@/components/TrackOrderStepper/TrackOrderStepper";
-
+import TrackOrderStepper from "../../TrackOrderStepper/TrackOrderStepper";
+import Modal from "../../Modal";
 import {
   Select,
   SelectContent,
@@ -14,7 +15,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../../ui/select";
 
 const PurchaseHistory = () => {
   const [isEyeOpen, setIsEyeOpen] = useState(false);
@@ -34,8 +35,8 @@ const PurchaseHistory = () => {
         width={"md:w-[90%]"}
         height={"h-[80vh]"}
       >
-      <h4 className="px-5 py-3 text-xl ">Order Id: 20240803-07483320</h4>
-      <hr className="mb-4" />
+        <h4 className="px-5 py-3 text-xl ">Order Id: 20240803-07483320</h4>
+        <hr className="mb-4" />
         <TrackOrderStepper />
       </Modal>
 

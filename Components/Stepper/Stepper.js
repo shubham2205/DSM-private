@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import CartStep from "./CartStep";
 import ShippingStep from "./ShippingStep";

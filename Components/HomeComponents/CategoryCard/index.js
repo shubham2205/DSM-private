@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
@@ -18,19 +20,6 @@ const CategoryCard = ({ name, icon, poster }) => {
       setShowDropdown(false);
     }
   };
-
-  // const listItems = [
-  //   "dsdd",
-  //   "wdwdwd",
-  //   "wdw",
-  //   "dwqdqwd",
-  //   "wdfw",
-  //   "ddwqdqw",
-  //   "dqd",
-  //   "fwd",
-  //   "qwdwfw",
-  //   "fwfgegfef",
-  // ];
 
   return (
     <div className=" w-full">

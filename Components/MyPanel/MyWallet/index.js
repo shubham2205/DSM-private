@@ -1,10 +1,11 @@
+"use client";
+
 import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { LiaUploadSolid } from "react-icons/lia";
 import { PiSmileySad } from "react-icons/pi";
 import { FaIndianRupeeSign } from "react-icons/fa6";
-import Modal from "@/components/Modal/Modal";
 import PanelSidebar from "../PanelSidebar/PanelSidebar";
+import Modal from "../../Modal";
 
 const MyWallet = () => {
   const [isMyWalletOpen, SetIsMyWalletOpen] = useState(false);
@@ -68,8 +69,7 @@ const MyWallet = () => {
       </Modal>
 
       <div className="flex sm:px-14 mt-12 gap-6">
-        
-          <PanelSidebar />
+        <PanelSidebar />
 
         <section className="w-full  xl:w-4/5 h-auto">
           <div className="flex flex-col md:flex-row justify-evenly gap-3">

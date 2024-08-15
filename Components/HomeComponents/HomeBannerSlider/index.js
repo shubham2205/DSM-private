@@ -1,22 +1,9 @@
-// import Slider from "@/components/Slider/Slider";
 import Image from "next/image";
 import React from "react";
 import { SwiperSlide } from "swiper/react";
 import Slider from "../../Slider/SliderPerview1";
 
 const HomeBanner = ({ data }) => {
-  // const bannerImages = [
-  //   "/Images/banner-Img1.jpg",
-  //   "/Images/banner-Img2.jpg",
-  //   "/Images/banner-Img2.jpg",
-  //   "/Images/banner-Img2.jpg",
-  //   "/Images/banner-Img2.jpg",
-  //   "/Images/banner-Img2.jpg",
-  //   "/Images/banner-Img2.jpg",
-  //   "/Images/banner-Img2.jpg",
-  // ];
-
-  // console.log(data, "banner wala data");
   let height = "md:h-[21rem]";
   return (
     <div className=" w-full h-full ">

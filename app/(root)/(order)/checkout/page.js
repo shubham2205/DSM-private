@@ -1,12 +1,6 @@
-"use client"
-
+"use client";
 
 import React, { useState } from "react";
-// import CartStep from "./CartStep";
-// import ShippingStep from "./ShippingStep";
-// import DeliveryStep from "./DeliveryStep";
-// import PaymentStep from "./PaymentStep";
-// import ConfirmationStep from "./ConfirmationStep";
 import {
   LiaShoppingCartSolid,
   LiaTruckSolid,
@@ -145,5 +139,4 @@ const Checkout = () => {
   );
 };
 
-
-export default Checkout
+export default Checkout;

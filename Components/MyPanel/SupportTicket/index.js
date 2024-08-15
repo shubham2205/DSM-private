@@ -1,8 +1,10 @@
-import Modal from "@/components/Modal/Modal";
+"use client";
+
 import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { PiSmileySad } from "react-icons/pi";
 import PanelSidebar from "../PanelSidebar/PanelSidebar";
+import Modal from "../../Modal";
 
 const SupportTicket = () => {
   const [isSupportTicket, SetIsSupportTicket] = useState(false);

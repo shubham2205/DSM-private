@@ -1,12 +1,14 @@
-import ProductCard from "@/components/Cards/ProductCard/ProductCard";
-import SliderWithoutButton from "@/components/Slider/SliderWithoutButton";
-import SocialMediaContact from "@/components/SocialMediaContact/SocialMediaContact";
+"use client";
+
 import { singleCardData } from "@/data";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { SwiperSlide } from "swiper/react";
+import ProductCard from "../../../Cards/ProductCard";
+import SliderWithoutButton from "../../../Slider/SliderWithoutButton";
+import SocialMediaContact from "../../../SocialMediaContact";
 
 const VisitStore = () => {
   const [activeTab, setActiveTab] = useState("storehome");

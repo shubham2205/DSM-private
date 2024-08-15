@@ -1,11 +1,13 @@
-import Modal from "@/components/Modal/Modal";
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import { GoPlus } from "react-icons/go";
 import PanelSidebar from "../PanelSidebar/PanelSidebar";
-import SearchDropdown from "@/components/SearchDropdown/SearchDropdown";
 import Image from "next/image";
 import { RxMagnifyingGlass } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
+import Modal from "../../Modal";
+import SearchDropdown from "../../SearchDropdown";
 
 const ManageProfile = () => {
   const data = ["India", "Pakistan", "china", "Landon", "puri", "brazile"];

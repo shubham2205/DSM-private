@@ -1,5 +1,5 @@
-import BrandCard from "@/components/Cards/BrandsCard/BrandCard";
 import React from "react";
+import BrandCard from "../../Cards/BrandsCard";
 
 const BrandSection = () => {
   return (

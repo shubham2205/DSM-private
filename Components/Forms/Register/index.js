@@ -1,10 +1,12 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { IoMdEyeOff } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Modal from "../../Modal";
 
-import Modal from "@/components/Modal/Modal";
 
 const Register = () => {
   const [useEmail, setUseEmail] = useState(false);

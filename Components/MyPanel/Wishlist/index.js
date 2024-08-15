@@ -1,13 +1,13 @@
-import RatingStar from "@/components/RatingStar/RatingStar";
+"use client";
+
 import Image from "next/image";
 import React, { useState } from "react";
-
 import { BsTrash3 } from "react-icons/bs";
 import { LiaShoppingCartSolid } from "react-icons/lia";
-import PanelSidebar from "../PanelSidebar/PanelSidebar";
-import AddToCartPopUp from "@/components/AddToCartPopUp/AddToCartPopUp";
-import Link from "next/link";
-import Modal from "@/components/Modal/Modal";
+import RatingStar from "../../RatingStar";
+import PanelSidebar from "../PanelSidebar";
+import AddToCartPopUp from "../../AddToCartPopUp";
+import Modal from "../../Modal";
 
 const Wishlist = () => {
   const [isAddToCartPppUp, setIsAddToCartPppUp] = useState(false);

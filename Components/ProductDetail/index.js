@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import {
@@ -14,16 +14,15 @@ import { CiHeart } from "react-icons/ci";
 import ReactImageMagnifier from "simple-image-magnifier/react";
 import Image from "next/image";
 import { BsWhatsapp } from "react-icons/bs";
-import ProductCard from "@/components/Cards/ProductCard/ProductCard";
 import { SwiperSlide } from "swiper/react";
-import SliderPerview2 from "@/components/Slider/SliderPerview2";
 import DOMPurify from "dompurify";
 import { FaStar } from "react-icons/fa";
 import useSWR from "swr";
 import { useRouter } from "next/router";
-import RatingStar from "@/components/RatingStar/RatingStar";
 import Link from "next/link";
-import Loading from "../Loading";
+import ProductCard from "../Cards/ProductCard";
+import SliderPerview2 from "../Slider/SliderPerview2";
+import RatingStar from "../RatingStar";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const ProductDetail = ({ data }) => {
@@ -35,7 +34,7 @@ const ProductDetail = ({ data }) => {
   const [rating, setRating] = useState(data && data?.at(0)?.rating);
   //--------For Tabs Start---------
   const [imgActive, setImgActive] = useState(0);
-  
+
   const router = useRouter();
   const { id } = router.query;
   const {
@@ -81,7 +80,6 @@ const ProductDetail = ({ data }) => {
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
   };
-
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -247,7 +245,7 @@ const ProductDetail = ({ data }) => {
               </div>
             </div>
             <hr className="mb-4 mt-2" />
-            
+
             <div className="mb-4 flex flex-col md:flex-row md:items-center md:gap-[4.5rem]">
               <div className=" text-light-gray-header text-sm">Quantity:</div>
               <div className="flex items-center mt-2">

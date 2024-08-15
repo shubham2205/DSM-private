@@ -616,7 +616,10 @@
 // export default ProductDetails;
 
 
-import { useRouter } from "next/router";
+
+"use client";
+
+import { useParams } from "next/navigation";
 import React from "react";
 import useSWR from "swr";
 import ProductDetail from "../../../../../Components/ProductDetail";
@@ -624,16 +627,16 @@ import ProductDetail from "../../../../../Components/ProductDetail";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Product = () => {
-  const router = useRouter();
-  const { id } = router.query;
-
-  // console.log("router", router);
+  const { id } = useParams();  
 
   const {
     data: productDetailData,
     error: productDetailDataError,
     isValidating: productDetailDataValidating,
   } = useSWR(`${process.env.NEXT_PUBLIC_API}/v3/products/${id}`, fetcher);
+
+  if (productDetailDataError) return <div>Error loading product details</div>;
+  if (!productDetailData) return <div>Loading...</div>;
 
   return (
     <main>

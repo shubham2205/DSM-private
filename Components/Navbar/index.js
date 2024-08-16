@@ -271,9 +271,11 @@ const Navbar = () => {
                           <span className="font-semibold">₹153</span>
                         </div>
                         <div className="flex justify-center gap-3 mt-4">
-                          <button className="bg-[#464444] text-white py-[0.40rem] px-3 rounded-sm">
-                            View cart
-                          </button>
+                          <Link href={"/checkout"}>
+                            <button className="bg-[#464444] text-white py-[0.40rem] px-3 rounded-sm">
+                              View cart
+                            </button>
+                          </Link>
 
                           <Link href={"/checkout"}>
                             <button className="bg-red-500 text-white py-[0.40rem] px-3 rounded-sm">

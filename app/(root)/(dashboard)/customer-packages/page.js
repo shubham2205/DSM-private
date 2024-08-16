@@ -3,7 +3,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { IoMdCheckmark } from "react-icons/io";
-import Modal from "../../../Modal";
+import Modal from "../../../../Components/Modal";
+// import Modal from "../../../Modal";
 
 const AddNewProduct = () => {
   const [isAddNewProduct, setIsAddNewProduct] = useState(false);

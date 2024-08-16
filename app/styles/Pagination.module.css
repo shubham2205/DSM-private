@@ -1,0 +1,71 @@
+/* FeaturedCard.module.css */
+.item {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+  list-style-type: none;
+  /* padding: 1rem; */
+  /* background-color: #f5f7fa; */
+  border-radius: 50px;
+  
+}
+
+.pagination a {
+  padding: 0.5rem 1rem;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #333;
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 8px; */
+  
+  
+  
+  text-decoration: none;
+  /* font-weight: bold; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.pagination a:hover {
+  background-color: #ef251f;
+  color: #fff;
+}
+
+.pagination .active a {
+  background-color: #ef251f;
+  color: #fff;
+}
+
+.pagination .previous a,
+.pagination .next a {
+  background-color: transparent;
+  color: #333;
+}
+
+.pagination .previous a:hover,
+.pagination .next a:hover {
+  background-color: transparent;
+  color: #ef251f;
+}
+
+.pagination .disabled a {
+  color: #808e9b;
+}
+
+.next{
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.previous{
+    background-color: #fff;
+    border-radius: 50%;
+}

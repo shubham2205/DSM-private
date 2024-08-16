@@ -234,7 +234,7 @@ const Footer = () => {
                               </li>
                               <li>
                                 <Link
-                                      href={`/about-us`}
+                                  href={`/aboutus`}
                                   className="h  hover:text-gray-400  "
                                 >
                                   About us
@@ -242,7 +242,7 @@ const Footer = () => {
                               </li>
                               <li>
                                 <Link
-                                href={`/terms`} 
+                                  href={`/terms`}
                                   className="ho  hover:text-gray-400 "
                                 >
                                   Terms of Use
@@ -250,14 +250,17 @@ const Footer = () => {
                               </li>
                               <li>
                                 <Link
-                                 href={`/privacypolicy`}
+                                  href={`/privacypolicy`}
                                   className="h  hover:text-gray-400  "
                                 >
                                   Privacy Policy
                                 </Link>
                               </li>
                               <li>
-                                <Link href={`/returnpolicy`} className="hover:underline ">
+                                <Link
+                                  href={`/returnpolicy`}
+                                  className="hover:underline "
+                                >
                                   Return Policy
                                 </Link>
                               </li>
@@ -310,7 +313,7 @@ const Footer = () => {
                             <ul className="text-gray-500 text-sm font-semibold leading-7">
                               <li>
                                 <Link
-                                 href={`/login`}
+                                  href={`/login`}
                                   className="  hover:text-gray-400 "
                                 >
                                   Login
@@ -318,7 +321,7 @@ const Footer = () => {
                               </li>
                               <li>
                                 <Link
-                                  href="#"
+                                  href="purchase_history"
                                   className="  hover:text-gray-400 "
                                 >
                                   Order History
@@ -362,27 +365,42 @@ const Footer = () => {
                       <hr className="ring-0  ring-white mb-3 mt-1" />
                       <ul className="text-gray-500 text-sm font-semibold leading-7">
                         <li>
-                          <Link      href={`/faq`} className="ho  hover:text-gray-400 ">
+                          <Link
+                            href={`/faq`}
+                            className="ho  hover:text-gray-400 "
+                          >
                             FAQs
                           </Link>
                         </li>
                         <li>
-                          <Link      href={`/about-us`} className="h  hover:text-gray-400  ">
+                          <Link
+                            href={`/aboutus`}
+                            className="h  hover:text-gray-400  "
+                          >
                             About us
                           </Link>
                         </li>
                         <li>
-                          <Link      href={`/terms`} className="ho  hover:text-gray-400 ">
+                          <Link
+                            href={`/terms`}
+                            className="ho  hover:text-gray-400 "
+                          >
                             Terms of Use
                           </Link>
                         </li>
                         <li>
-                          <Link href={`/privacypolicy`}  className="h  hover:text-gray-400  ">
+                          <Link
+                            href={`/privacypolicy`}
+                            className="h  hover:text-gray-400  "
+                          >
                             Privacy Policy
                           </Link>
                         </li>
                         <li>
-                          <Link href={`/returnpolicy`} className="hover:underline ">
+                          <Link
+                            href={`/returnpolicy`}
+                            className="hover:underline "
+                          >
                             Return Policy
                           </Link>
                         </li>
@@ -402,12 +420,18 @@ const Footer = () => {
                       <hr className="ring-0  ring-white mb-3 mt-1" />
                       <ul className="text-gray-500 text-sm font-semibold leading-7">
                         <li>
-                          <Link href={`/login`} className="  hover:text-gray-400 ">
+                          <Link
+                            href={`/login`}
+                            className="  hover:text-gray-400 "
+                          >
                             Login
                           </Link>
                         </li>
                         <li>
-                          <Link href="#" className="  hover:text-gray-400 ">
+                          <Link
+                            href="purchase_history"
+                            className="  hover:text-gray-400 "
+                          >
                             Order History
                           </Link>
                         </li>

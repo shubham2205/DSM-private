@@ -1,6 +1,8 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from 'next/navigation'
 import React from "react";
 import { HiOutlineHeart } from "react-icons/hi2";
 import { LiaAtomSolid, LiaFileAlt } from "react-icons/lia";
@@ -11,10 +13,10 @@ import { TfiDownload } from "react-icons/tfi";
 import { VscHome } from "react-icons/vsc";
 
 const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   const getActiveClass = (path) => {
-    return router.pathname === path ? "!bg-red-200 !border-red-500" : "";
+    return pathname === path ? "!bg-red-200 !border-red-500" : "";
   };
   return (
     <>
@@ -81,12 +83,12 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
           </Link>
 
           {/* Purchase History */}
-          <Link href={"/purchasehistory"}>
+          <Link href={"/purchase_history"}>
             {/* -----Desktop View----- */}
             <div className="hidden lg:block">
               <div
                 className={`px-8 p-2 cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
-                 bg-white ${getActiveClass("/purchasehistory")}
+                 bg-white ${getActiveClass("/purchase_history")}
                 `}
               >
                 <div className="flex items-center gap-2">
@@ -107,7 +109,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
             <div
               onClick={() => setIsOpen(false)}
               className={`px-8 p-2 lg:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
-                 bg-white ${getActiveClass("/purchasehistory")}
+                 bg-white ${getActiveClass("/purchase_history")}
                 `}
             >
               <div className="flex items-center gap-2">
@@ -125,12 +127,12 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
           </Link>
 
           {/* Downloads */}
-          <Link href={"/download"}>
+          <Link href={"/digital_purchase_history"}>
             {/* ----------Desktop view--------- */}
             <div className="hidden lg:block">
               <div
                 className={`px-8 p-2 cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
-                 bg-white ${getActiveClass("/download")}
+                 bg-white ${getActiveClass("/digital_purchase_history")}
                 `}
               >
                 <div className="flex items-center gap-2">
@@ -151,7 +153,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
             <div
               onClick={() => setIsOpen(false)}
               className={`px-8 p-2 lg:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
-                 bg-white ${getActiveClass("/download")}
+                 bg-white ${getActiveClass("/digital_purchase_history")}
                 `}
             >
               <div className="flex items-center gap-2">
@@ -213,12 +215,12 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
           </Link>
 
           {/* Classified Products */}
-          <Link href={"/classified_products"}>
+          <Link href={"/customer_products"}>
             {/* -------Desktop View----------- */}
             <div className="hidden lg:block">
               <div
                 className={`px-8 p-2 cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
-                 bg-white ${getActiveClass("/classified_products")}
+                 bg-white ${getActiveClass("/customer_products")}
                 `}
               >
                 <div className="flex items-center gap-2">
@@ -239,7 +241,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
             <div
               onClick={() => setIsOpen(false)}
               className={`px-8 p-2 lg:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
-                 bg-white ${getActiveClass("/classified_products")}
+                 bg-white ${getActiveClass("/customer_products")}
                 `}
             >
               <div className="flex items-center gap-2">

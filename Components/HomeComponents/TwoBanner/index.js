@@ -6,6 +6,7 @@ const TwoBanner = ({ data }) => {
     <div>
       <div className="w-full grid lg:grid-cols-2 gap-5">
         {data &&
+          data?.length > 0 &&
           data.map((banner, i) => (
             <div className="" key={i}>
               <Image

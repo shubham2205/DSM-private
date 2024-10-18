@@ -104,67 +104,63 @@ const SupportTicket = () => {
           </form>
         </div>
       </Modal>
-      <div className="flex sm:px-14 mt-12 gap-6">
-        
-          <PanelSidebar />
 
-        <section className="w-full  xl:w-4/5 h-auto">
-          <div className="flex justify-evenly">
-            {/* First Box  */}
-            <div
-              onClick={() => SetIsSupportTicket(true)}
-              className="bg-white w-[22rem] rounded-md flex flex-col gap-4 py-6 items-center shadow-sm cursor-pointer hover:shadow-custom transition-all ease-in-out duration-100"
-            >
-              <div className="bg-[#8F97AB] w-16 h-16 flex items-center justify-center rounded-full">
-                <AiOutlinePlus className="text-5xl text-white" />
-              </div>
-              <p className="text-primary-red text-lg">Create a Ticket</p>
+      <section className="w-full   h-auto">
+        <div className="flex justify-evenly">
+          {/* First Box  */}
+          <div
+            onClick={() => SetIsSupportTicket(true)}
+            className="bg-white w-[22rem] rounded-md flex flex-col gap-4 py-6 items-center shadow-sm cursor-pointer hover:shadow-custom transition-all ease-in-out duration-100"
+          >
+            <div className="bg-[#8F97AB] w-16 h-16 flex items-center justify-center rounded-full">
+              <AiOutlinePlus className="text-5xl text-white" />
             </div>
+            <p className="text-primary-red text-lg">Create a Ticket</p>
+          </div>
+        </div>
+
+        {/*------------------------------------Table Section Second Start----------------------------  */}
+        <div className="bg-white mt-6">
+          <h1 className="py-4 px-4 text-gray-700 text-md">Tickets</h1>
+          <hr />
+          <div className="min-w-full shadow-md rounded-lg overflow-x-scroll xl:overflow-x-hidden ">
+            <table className="min-w-full leading-normal bg-white mt-5 ">
+              <thead>
+                <tr className="">
+                  <th className=" px-5 py-3 border-b-2 border-gray-100 text-left text-sm text-nowrap text-black">
+                    Ticket ID
+                  </th>
+                  <th className=" px-5 py-3 border-b-2 border-gray-100 text-left text-sm text-nowrap text-black">
+                    Sending Date
+                  </th>
+                  <th className=" px-5 py-3 border-b-2 border-gray-100 text-left text-sm text-nowrap text-black">
+                    Subject
+                  </th>
+                  <th className=" px-5 py-3 border-b-2 border-gray-100 text-left text-sm text-nowrap text-black">
+                    Status
+                  </th>
+                  <th className=" px-5 py-3 border-b-2 border-gray-100 text-left text-sm text-nowrap text-black">
+                    Options
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="hidden">
+                <tr>
+                  <td className="px-5 py-3 text-gray-500 text-2xl"></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
-          {/*------------------------------------Table Section Second Start----------------------------  */}
-          <div className="bg-white mt-6">
-            <h1 className="py-4 px-4 text-gray-700 text-md">Tickets</h1>
-            <hr />
-            <div className="min-w-full shadow-md rounded-lg overflow-x-scroll xl:overflow-x-hidden ">
-              <table className="min-w-full leading-normal bg-white mt-5 ">
-                <thead>
-                  <tr className="">
-                    <th className=" px-5 py-3 border-b-2 border-gray-100 text-left text-sm text-nowrap text-black">
-                      Ticket ID
-                    </th>
-                    <th className=" px-5 py-3 border-b-2 border-gray-100 text-left text-sm text-nowrap text-black">
-                      Sending Date
-                    </th>
-                    <th className=" px-5 py-3 border-b-2 border-gray-100 text-left text-sm text-nowrap text-black">
-                      Subject
-                    </th>
-                    <th className=" px-5 py-3 border-b-2 border-gray-100 text-left text-sm text-nowrap text-black">
-                      Status
-                    </th>
-                    <th className=" px-5 py-3 border-b-2 border-gray-100 text-left text-sm text-nowrap text-black">
-                      Options
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="hidden">
-                  <tr>
-                    <td className="px-5 py-3 text-gray-500 text-2xl"></td>
-                  </tr>
-                </tbody>
-              </table>
+          {/* --------------Not Found Section Start */}
+          <div className="bg-white flex flex-col items-center justify-center py-5 ">
+            <div className="text-5xl my-3 text-gray-500">
+              <PiSmileySad />
             </div>
-
-            {/* --------------Not Found Section Start */}
-            <div className="bg-white flex flex-col items-center justify-center py-5 ">
-              <div className="text-5xl my-3 text-gray-500">
-                <PiSmileySad />
-              </div>
-              <h6 className="text-xl">Nothing Found</h6>
-            </div>
+            <h6 className="text-xl">Nothing Found</h6>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </>
   );
 };

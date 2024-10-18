@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { FaFileAlt } from "react-icons/fa";
 import { RiArrowGoBackLine } from "react-icons/ri";
@@ -8,7 +10,7 @@ import Link from "next/link";
 import MobileStickyFooter from "./MobileFooter";
 import SocialMediaContact from "../SocialMediaContact";
 
-const Footer = () => {
+const Footer = ({ setting }) => {
   return (
     <>
       <MobileStickyFooter />
@@ -16,26 +18,26 @@ const Footer = () => {
         <div className="bg-[#111723]">
           <div className="footer-top Policy-link flex justify-center items-center">
             <div className="grid grid-cols-2 xl:grid-cols-4  px-1 xl:px-6 w-full h-auto bg-white">
-              <Link href={`/terms`}>
+              <Link href={`/termsCondition`}>
                 <div className="flex flex-col items-center ring-1 min-w-36 h-30 py-7 ring-gray-200">
                   <FaFileAlt className="text-primary-red text-3xl" />
 
                   <span className="mt-2 text-gray-700">Terms & Conditions</span>
                 </div>
               </Link>
-              <Link href={`/returnpolicy`}>
+              <Link href={`/returnPolicy`}>
                 <div className="flex flex-col items-center ring-1 min-w-36 h-30 py-7 ring-gray-200">
                   <RiArrowGoBackLine className="text-primary-red text-3xl" />
                   <span className="mt-2 text-gray-700">Return Policy</span>
                 </div>
               </Link>
-              <Link href={`/supportpolicy`}>
+              <Link href={`/supportPolicy`}>
                 <div className="flex flex-col items-center ring-1 min-w-36 h-30 py-7 ring-gray-200">
                   <TiSupport className="text-primary-red text-3xl" />
                   <span className="mt-2 text-gray-700">Support Policy</span>
                 </div>
               </Link>
-              <Link href={`/privacypolicy`}>
+              <Link href={`/privacyPolicy`}>
                 <div className="flex flex-col items-center ring-1 min-w-36 h-30 py-7 ring-gray-200">
                   <AiOutlineExclamationCircle className="text-primary-red text-3xl" />
                   <span className="mt-2 text-gray-700">Privacy Policy</span>
@@ -58,12 +60,19 @@ const Footer = () => {
                       alt="f-logo"
                     />
                   </div>
-                  <p className="mb-4 text-sm">
-                    DSM Online is one of the fastest growing Company of
-                    Electronic Components in Bhopal. Our focus on customer
-                    satisfaction and expert technical support make us the ideal
-                    single-point source for all your requirements.
-                  </p>
+                  <p
+                    className="mb-4 text-sm"
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        setting?.data
+                          ?.filter(
+                            (ele) => ele?.type === "about_us_description"
+                          )
+                          ?.map((ele) => ele.value)
+                          ?.at(0) || "",
+                    }}
+                  />
+
                   <div className="flex items-center my-3">
                     <input
                       type="email"
@@ -75,20 +84,34 @@ const Footer = () => {
                     </button>
                   </div>
                   <div className=" flex gap-2 lg:gap-0 lg:space-x-4">
-                    <Image
-                      src={"/Images/google-play.png"}
-                      width={150}
-                      height={100}
-                      alt="Google Play"
-                      className="h-12 my-2"
-                    />
-                    <Image
-                      src={"/Images/app-store.png"}
-                      width={150}
-                      height={100}
-                      alt="app store"
-                      className="h-12 my-2"
-                    />
+                    <Link
+                      href={`${setting?.data
+                        ?.filter((ele) => ele?.type === "play_store_link")
+                        ?.map((ele) => ele.value)
+                        ?.at(0)}`}
+                    >
+                      <Image
+                        src={"/Images/google-play.png"}
+                        width={150}
+                        height={100}
+                        alt="Google Play"
+                        className="h-12 my-2"
+                      />
+                    </Link>
+                    <Link
+                      href={`${setting?.data
+                        ?.filter((ele) => ele?.type === "app_store_link")
+                        ?.map((ele) => ele.value)
+                        ?.at(0)}`}
+                    >
+                      <Image
+                        src={"/Images/app-store.png"}
+                        width={150}
+                        height={100}
+                        alt="app store"
+                        className="h-12 my-2"
+                      />
+                    </Link>
                   </div>
                 </div>
                 <div className="w-full lg:w-2/3 lg:flex lg:justify-end ">
@@ -104,22 +127,33 @@ const Footer = () => {
                           {" "}
                           Address:
                         </span>
-                        <br /> B-23, C-sector, Indrapuri, Bhopal, Madhya Pradesh
-                        462022
+                        <br />
+                        {setting?.data
+                          ?.filter((ele) => ele?.type === "contact_address")
+                          ?.map((ele) => ele.value)
+                          ?.at(0)}
                       </p>
                       <p className="text-footer-gray-txt">
                         <span className="text-footer-light-gray-txt">
                           {" "}
                           Phone:
                         </span>
-                        <br /> +91 9713330108
+                        <br />{" "}
+                        {setting?.data
+                          ?.filter((ele) => ele?.type === "contact_phone")
+                          ?.map((ele) => ele.value)
+                          ?.at(0)}
                       </p>
                       <p className="text-footer-gray-txt">
                         <span className="text-footer-light-gray-txt">
                           {" "}
                           Email:
                         </span>
-                        <br /> info@dsmonline.in
+                        <br />
+                        {setting?.data
+                          ?.filter((ele) => ele?.type === "contact_email")
+                          ?.map((ele) => ele.value)
+                          ?.at(0)}
                       </p>
                     </div>
 
@@ -167,22 +201,35 @@ const Footer = () => {
                                 {" "}
                                 Address:
                               </span>
-                              <br /> B-23, C-sector, Indrapuri, Bhopal, Madhya
-                              Pradesh 462022
+                              <br />{" "}
+                              {setting?.data
+                                ?.filter(
+                                  (ele) => ele?.type === "contact_address"
+                                )
+                                ?.map((ele) => ele.value)
+                                ?.at(0)}
                             </p>
                             <p className="text-footer-gray-txt">
                               <span className="text-footer-light-gray-txt">
                                 {" "}
                                 Phone:
                               </span>
-                              <br /> +91 9713330108
+                              <br />{" "}
+                              {setting?.data
+                                ?.filter((ele) => ele?.type === "contact_phone")
+                                ?.map((ele) => ele.value)
+                                ?.at(0)}
                             </p>
                             <p className="text-footer-gray-txt">
                               <span className="text-footer-light-gray-txt">
                                 {" "}
                                 Email:
                               </span>
-                              <br /> info@dsmonline.in
+                              <br />{" "}
+                              {setting?.data
+                                ?.filter((ele) => ele?.type === "contact_email")
+                                ?.map((ele) => ele.value)
+                                ?.at(0)}
                             </p>
 
                             <SocialMediaContact />
@@ -242,7 +289,7 @@ const Footer = () => {
                               </li>
                               <li>
                                 <Link
-                                  href={`/terms`}
+                                  href={`/termsCondition`}
                                   className="ho  hover:text-gray-400 "
                                 >
                                   Terms of Use
@@ -250,7 +297,7 @@ const Footer = () => {
                               </li>
                               <li>
                                 <Link
-                                  href={`/privacypolicy`}
+                                  href={`/privacyPolicy`}
                                   className="h  hover:text-gray-400  "
                                 >
                                   Privacy Policy
@@ -258,7 +305,7 @@ const Footer = () => {
                               </li>
                               <li>
                                 <Link
-                                  href={`/returnpolicy`}
+                                  href={`/returnPolicy`}
                                   className="hover:underline "
                                 >
                                   Return Policy
@@ -266,7 +313,7 @@ const Footer = () => {
                               </li>
                               <li>
                                 <Link
-                                  href="#"
+                                  href={`/shippingAndDelivery`}
                                   className="h  hover:text-gray-400 "
                                 >
                                   Shipping and Delivery
@@ -382,7 +429,7 @@ const Footer = () => {
                         </li>
                         <li>
                           <Link
-                            href={`/terms`}
+                            href={`/termsCondition`}
                             className="ho  hover:text-gray-400 "
                           >
                             Terms of Use
@@ -390,7 +437,7 @@ const Footer = () => {
                         </li>
                         <li>
                           <Link
-                            href={`/privacypolicy`}
+                            href={`/privacyPolicy`}
                             className="h  hover:text-gray-400  "
                           >
                             Privacy Policy
@@ -398,14 +445,17 @@ const Footer = () => {
                         </li>
                         <li>
                           <Link
-                            href={`/returnpolicy`}
+                            href={`/returnPolicy`}
                             className="hover:underline "
                           >
                             Return Policy
                           </Link>
                         </li>
                         <li>
-                          <Link href="#" className="h  hover:text-gray-400 ">
+                          <Link
+                            href={`shippingAndDelivery`}
+                            className="h  hover:text-gray-400 "
+                          >
                             Shipping and Delivery
                           </Link>
                         </li>
@@ -474,19 +524,32 @@ const Footer = () => {
           <div className="footer-bottom py-4   bg-[#0d111b] px-4 ">
             <div className="flex justify-center  lg:justify-between  items-center  flex-wrap">
               <div className="company-branding flex w-full lg:w-auto justify-center items-center  text-xs md:text-sm text-center">
-                <span className="text-white">
-                  DSM Online Brand of <br className="md:hidden" />
+                <span
+                  className="text-white"
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      setting?.data
+                        ?.filter(
+                          (ele) => ele?.type === "frontend_copyright_text"
+                        )
+                        ?.map((ele) => ele.value)
+                        ?.at(0) || "",
+                  }}
+                />
+                {/* DSM Online Brand of <br className="md:hidden" />
                   <Link
                     href="https://www.satyakabir.com/"
                     className="text-gray-600 font-[900]"
                   >
-                    {" "}
-                    Satya Kabir E-solutions Private Limited{" "}
+                    {setting?.data
+                      ?.filter((ele) => ele?.type === "frontend_copyright_text")
+                      ?.map((ele) => ele.value)
+                      ?.at(0)}
                   </Link>
-                </span>
+                </span> */}
               </div>
               <div className="pb-20 md:pb-0">
-                <SocialMediaContact />
+                <SocialMediaContact data={setting?.data} />
               </div>
             </div>
           </div>

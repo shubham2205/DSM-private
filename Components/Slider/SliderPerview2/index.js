@@ -53,17 +53,17 @@ const SliderPerview2 = ({ children, slidepre, spacebet, hei }) => {
       >
         {children}
 
-        <div className="absolute w-full h-full top-[35%] md:top-[50%]   z-20">
+        <div className="absolute w-full h-full top-[35%] md:top-[50%]   ">
           <div className="swiper-nav-btns flex justify-between gap-4 items-center ">
             <button
               onClick={() => swiperRef.current.slidePrev()}
-              className="text-[#333333] bg-white absolute left-0  shadow-custom p-3 rounded-full"
+              className="text-[#333333] bg-white absolute left-0  z-20 shadow-custom p-3 rounded-full"
             >
               <IoIosArrowBack />
             </button>
             <button
               onClick={() => swiperRef.current.slideNext()}
-              className="text-[#333333] bg-white absolute right-0 shadow-custom p-3 rounded-full"
+              className="text-[#333333] bg-white absolute right-0 z-20 shadow-custom p-3 rounded-full"
             >
               <IoIosArrowForward />
             </button>

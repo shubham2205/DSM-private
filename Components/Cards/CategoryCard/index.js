@@ -5,12 +5,11 @@ import Link from "next/link";
 import React from "react";
 
 const CategoryCard = ({ data }) => {
-  // console.log(data, "from BB");
 
   return (
-    // <div className="flex flex-wrap justify-center lg:justify-between">
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {data &&
+        data?.length > 0 &&
         data?.map((item, i) => (
           <div key={i}>
             <Link href={`/brands/${i}`}>

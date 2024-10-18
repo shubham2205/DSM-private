@@ -1,11 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
-import DOMPurify from "dompurify";
 const OurBlogCardDetail = ({ datas }) => {
-  //-----------------------Sanitize the description---------------------
-  const sanitizedDescription = datas
-    ? DOMPurify.sanitize(datas?.description)
-    : "";
+
   return (
     <div className="mt-4">
       <div className="w-full md:h-[90vh]">
@@ -22,7 +20,7 @@ const OurBlogCardDetail = ({ datas }) => {
         <hr />
         <div
           className="lg:w-96 text-justify lg:text-start"
-          dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+          dangerouslySetInnerHTML={{ __html: datas?.description || "" }}
         />
       </div>
     </div>

@@ -6,16 +6,7 @@ import Link from "next/link";
 import SliderPerview2 from "../../Slider/SliderPerview2";
 import ProductCard from "../../Cards/ProductCard";
 
-const FeatureCardSlider = ({ title, btn, data }) => {
-  // console.log(data  , "feture data")
-  // const currentPageData = Array(20).fill({
-  //   discount: 50,
-  //   originalPrice: 99,
-  //   discountedPrice: 50,
-  //   rating: "★★★★☆",
-  //   description: "Multitec 150b Wire Stripper and Cutter",
-  //   imgSrc: "/Images/wire.jpg",
-  // });
+const FeatureCardSlider = ({ title, btn, data,tag ,checkWishlistItem}) => {
   return (
     <div className="w-full bg-white pt-3 lg:pt-0  px-2 md:p-5 my-6 ">
       <div className=" pt-3">
@@ -33,15 +24,17 @@ const FeatureCardSlider = ({ title, btn, data }) => {
       </div>
       <div>
         <SliderPerview2 slidepre={6} spacebet={20}>
-          {data?.map((cardData, index) => {
-            return (
-              <SwiperSlide key={index} className="">
-                <Link href={`/product/${cardData?.id}`}>
-                  <ProductCard cardData={cardData} />
-                </Link>
-              </SwiperSlide>
-            );
-          })}
+          {data &&
+            data?.length > 0 &&
+            data?.map((cardData, index) => {
+              return (
+                <SwiperSlide key={index} className="">
+                  <Link href={`/product/${cardData?.id}`}>
+                    <ProductCard cardData={cardData} tag={tag}  checkWishlistItem={checkWishlistItem}/>
+                  </Link>
+                </SwiperSlide>
+              );
+            })}
         </SliderPerview2>
       </div>
     </div>

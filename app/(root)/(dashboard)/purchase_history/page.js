@@ -115,100 +115,96 @@ const PurchaseHistory = () => {
         </div>
       </Modal>
 
-      <div className="flex sm:px-14 mt-12 gap-6">
-        <PanelSidebar />
-
-        <section className="w-full  xl:w-4/5 h-auto">
-          <div className="bg-white px-3">
-            <div className="overflow-x-auto">
-              <div className="min-w-full shadow-md rounded-lg overflow-x-scroll xl:overflow-x-hidden ">
-                <table className="min-w-full leading-normal ">
-                  <thead>
-                    <tr>
-                      <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
-                        Code
-                      </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
-                        Date
-                      </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
-                        Amount
-                      </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
-                        Delivery Status
-                      </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
-                        Payment Status
-                      </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
-                        Delivery OTP
-                      </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
-                        Options
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          20240803-07483320
-                        </p>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          03-08-2024
-                        </p>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p className="text-gray-900 whitespace-no-wrap">₹188</p>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <span className="relative inline-block px-3 py-1  text-orange-800 leading-tight">
-                          <span
-                            aria-hidden="true"
-                            className="absolute inset-0 bg-orange-200 opacity-50 rounded-full"
-                          ></span>
-                          <span className="relative ">Pending</span>
-                        </span>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <span className="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                          <span
-                            aria-hidden="true"
-                            className="absolute inset-0 bg-red-200 opacity-50 rounded-full"
-                          ></span>
-                          <span className="relative">Unpaid</span>
-                        </span>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p className="text-gray-900 whitespace-no-wrap">N/A</p>
-                      </td>
-                      <td className="px-5 py-5 border-gray-200 bg-white text-sm flex ">
-                        <button
-                          onClick={() => setIsDeleteOpen(true)}
-                          className="text-red-600 bg-red-100 p-2 rounded-full hover:text-red-900 mx-2"
-                        >
-                          <BsTrash3 />
-                        </button>
-                        <button
-                          onClick={() => setIsEyeOpen(true)}
-                          className="text-blue-600 bg-blue-100 p-2 rounded-full hover:text-blue-900 mx-2"
-                        >
-                          <LiaEye />
-                        </button>
-                        <button className="text-yellow-600 bg-yellow-100 p-2 rounded-full hover:text-yellow-900 mx-2">
-                          <TfiDownload />
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+      <section className="w-full   h-auto">
+        <div className="bg-white px-3">
+          <div className="overflow-x-auto">
+            <div className="min-w-full shadow-md rounded-lg overflow-x-scroll xl:overflow-x-hidden ">
+              <table className="min-w-full leading-normal ">
+                <thead>
+                  <tr>
+                    <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
+                      Code
+                    </th>
+                    <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
+                      Date
+                    </th>
+                    <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
+                      Amount
+                    </th>
+                    <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
+                      Delivery Status
+                    </th>
+                    <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
+                      Payment Status
+                    </th>
+                    <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
+                      Delivery OTP
+                    </th>
+                    <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm text-nowrap  text-black ">
+                      Options
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <p className="text-gray-900 whitespace-no-wrap">
+                        20240803-07483320
+                      </p>
+                    </td>
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <p className="text-gray-900 whitespace-no-wrap">
+                        03-08-2024
+                      </p>
+                    </td>
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <p className="text-gray-900 whitespace-no-wrap">₹188</p>
+                    </td>
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <span className="relative inline-block px-3 py-1  text-orange-800 leading-tight">
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-0 bg-orange-200 opacity-50 rounded-full"
+                        ></span>
+                        <span className="relative ">Pending</span>
+                      </span>
+                    </td>
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <span className="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-0 bg-red-200 opacity-50 rounded-full"
+                        ></span>
+                        <span className="relative">Unpaid</span>
+                      </span>
+                    </td>
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <p className="text-gray-900 whitespace-no-wrap">N/A</p>
+                    </td>
+                    <td className="px-5 py-5 border-gray-200 bg-white text-sm flex ">
+                      <button
+                        onClick={() => setIsDeleteOpen(true)}
+                        className="text-red-600 bg-red-100 p-2 rounded-full hover:text-red-900 mx-2"
+                      >
+                        <BsTrash3 />
+                      </button>
+                      <button
+                        onClick={() => setIsEyeOpen(true)}
+                        className="text-blue-600 bg-blue-100 p-2 rounded-full hover:text-blue-900 mx-2"
+                      >
+                        <LiaEye />
+                      </button>
+                      <button className="text-yellow-600 bg-yellow-100 p-2 rounded-full hover:text-yellow-900 mx-2">
+                        <TfiDownload />
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </>
   );
 };

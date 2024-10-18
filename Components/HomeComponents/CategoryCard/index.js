@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-const CategoryCard = ({ name, icon, poster }) => {
+const CategoryCard = ({ data }) => {
+  // const { name, icon, banner } = data;
+  // console.log(data, "11111");
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleMouseEnter = () => {
@@ -32,13 +33,13 @@ const CategoryCard = ({ name, icon, poster }) => {
           <Image
             width={500}
             height={500}
-            src={`${process.env.NEXT_PUBLIC_URL}/${icon}`}
-            alt={name}
+            src={`${process.env.NEXT_PUBLIC_URL}/${data?.icon}`}
+            alt={data?.name}
             className="w-full h-full text-xs rounded-full"
           />
         </div>
         <p className="text-center text-nowrap mt-1 text-[0.850rem] text-light-gray-header group-hover:text-black">
-          {name}
+          {data?.name}
         </p>
       </div>
 
@@ -47,7 +48,7 @@ const CategoryCard = ({ name, icon, poster }) => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           className="absolute top-92 mt-4 left-0 right-0 h-64 outline-1 outline-gray-950 bg-cover bg-clip-content bg-center animate-pulse bg-no-repeat py-2 px- text-black shadow-stone-900"
-          style={{ backgroundImage: `url(${poster})` }}
+          style={{ backgroundImage: `url(${data?.banner})` }}
         >
           <div className="top-0 left-0 right-0 bottom-0">
             <div className="grid grid-rows-5 grid-flow-col-dense mt-5 w-[40%] max-w-[60%]">
@@ -59,6 +60,7 @@ const CategoryCard = ({ name, icon, poster }) => {
                   </div>
                 </Link>
               ))} */}
+             
             </div>
           </div>
         </div>

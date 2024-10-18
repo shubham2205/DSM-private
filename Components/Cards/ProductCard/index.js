@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LiaHeart } from "react-icons/lia";
 import { LiaShoppingCartSolid } from "react-icons/lia";
 import Image from "next/image";
 import RatingStar from "../../RatingStar";
 
-const ProductCard = ({ cardData, wid }) => {
-  // console.log(typeof cardData?.rating)
-  // console.log('product',cardData);
+import {
+  isProductInWishlist,
+  addToWishlist,
+} from "../../../lib/actions/wishlist.action";
+import { FaHeart } from "react-icons/fa6";
+import { toast } from "react-toastify";
+
+const ProductCard = ({ cardData, wid, tag }) => {
+  const [isItemInWishlist, setIsItemInWishlist] = useState(false);
+
+  const handleCheckWishlist = async (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      if (isItemInWishlist) {
+        toast.info("Product is already in the wishlist");
+      } else {
+        await addToWishlist(cardData.id);
+        const result = await isProductInWishlist(cardData.id);
+        console.log(result, "wish");
+        setIsItemInWishlist(true);
+      }
+    } catch (error) {
+      console.error("Error adding product to wishlist:", error);
+      toast.error("Error adding product to wishlist");
+    }
+  };
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    console.log("Add to cart clicked");
+  };
+
   return (
     <div className="py-2">
       <div
@@ -33,11 +65,22 @@ const ProductCard = ({ cardData, wid }) => {
         </div>
         <div className=" md:px-4 py-4  ">
           <div className="flex justify-evenly  ">
-            <div className="tooltip mb-2 " data-tip="Add to wishlist">
-              <LiaHeart className="text-primary-red text-lg " />
+            <div
+              className="tooltip mb-2 cursor-pointer"
+              data-tip="Add to wishlist"
+              onClick={(e) => handleCheckWishlist(e, cardData.id)}
+            >
+              {isItemInWishlist ? (
+                <FaHeart className="text-primary-red text-lg" />
+              ) : (
+                <LiaHeart className="text-primary-red text-lg" />
+              )}
             </div>
             <div className="border-r-[1px]  border-gray-200 "></div>
-            <div className="mb-2 text-xl">
+            <div
+              className="mb-2 text-xl cursor-pointer"
+              onClick={handleAddToCart}
+            >
               <LiaShoppingCartSolid className="text-primary-red" />
             </div>
           </div>
@@ -53,8 +96,6 @@ const ProductCard = ({ cardData, wid }) => {
               </div>
             </div>
             <div className="flex items-center">
-              {/* <div className="text-lg text-yellow-500">{cardData?.rating}</div> */}
-
               <RatingStar rating={cardData?.rating} />
             </div>
             <div className="-mt-1 text-xs md:text-sm font-medium text-gray-600">

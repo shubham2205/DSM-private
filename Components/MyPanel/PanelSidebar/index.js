@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { HiOutlineHeart } from "react-icons/hi2";
 import { LiaAtomSolid, LiaFileAlt } from "react-icons/lia";
@@ -12,7 +12,9 @@ import { RxSketchLogo } from "react-icons/rx";
 import { TfiDownload } from "react-icons/tfi";
 import { VscHome } from "react-icons/vsc";
 
-const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
+const PanelSidebar = ({ hide, width, setIsOpen, isOpen, data }) => {
+  // console.log(data?.avatar, "data from side pNEL");
+
   const pathname = usePathname();
 
   const getActiveClass = (path) => {
@@ -21,27 +23,32 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
   return (
     <>
       <aside
-        className={` ${width ? width : "w-1/5"} h-[30rem] bg-white ${
+        className={` ${width ? width : ""} h-[30rem] bg-white ${
           hide ? hide : "hidden"
-        } xl:block col-span-3  pt-8`}
+        } md:block col-span-3  pt-8 shadow-sm`}
       >
         {/*---------- User Profile Image Start-------- */}
         <div className="text-center mb-4 ">
           <Image
-            className="rounded-full mx-auto w-20 h-20"
-            src={"/Images/useravatar.png"}
+            className="rounded-full mx-auto w-20 h-20 shadow-sm"
+            src={
+              `${process.env.NEXT_PUBLIC_URL}/${data?.avatar}` ||
+              "/Images/useravatar.png"
+            }
             alt="Profile"
             width={200}
             height={200}
           />
-          <h2 className="text-xl font-semibold mt-2">User Name</h2>
+          <h2 className="text-xl font-semibold mt-2">
+            {data?.name || "User Name"}
+          </h2>
         </div>
         {/* -----------------Router Name Link Start----------- */}
         <div className="space-y-2">
           {/* Dashboard  */}
           <Link href={`/dashboard`}>
             {/* ---------Desktop View---------- */}
-            <div className="hidden lg:block ">
+            <div className="hidden md:block ">
               <div
                 className={`px-8 p-2 cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white  
@@ -65,7 +72,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
             {/* --------mobile View--------- */}
             <div
               onClick={() => setIsOpen(false)}
-              className={`px-8 p-2 lg:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
+              className={`px-8 p-2 md:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white  
                 ${getActiveClass("/dashboard")}
                 `}
@@ -85,7 +92,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
           {/* Purchase History */}
           <Link href={"/purchase_history"}>
             {/* -----Desktop View----- */}
-            <div className="hidden lg:block">
+            <div className="hidden md:block">
               <div
                 className={`px-8 p-2 cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/purchase_history")}
@@ -108,7 +115,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
             {/*------ Mobile View --------*/}
             <div
               onClick={() => setIsOpen(false)}
-              className={`px-8 p-2 lg:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
+              className={`px-8 p-2 md:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/purchase_history")}
                 `}
             >
@@ -129,7 +136,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
           {/* Downloads */}
           <Link href={"/digital_purchase_history"}>
             {/* ----------Desktop view--------- */}
-            <div className="hidden lg:block">
+            <div className="hidden md:block ">
               <div
                 className={`px-8 p-2 cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/digital_purchase_history")}
@@ -152,7 +159,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
             {/* ----------Mobile View---------- */}
             <div
               onClick={() => setIsOpen(false)}
-              className={`px-8 p-2 lg:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
+              className={`px-8 p-2 md:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/digital_purchase_history")}
                 `}
             >
@@ -173,7 +180,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
           {/* Wishlist */}
           <Link href={"/wishlists"}>
             {/* -----------Desktop View-------- */}
-            <div className="hidden lg:block">
+            <div className="hidden md:block">
               <div
                 className={`px-8 p-2 cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/wishlists")}
@@ -196,7 +203,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
             {/* ----------Mobile View--------- */}
             <div
               onClick={() => setIsOpen(false)}
-              className={`px-8 p-2 lg:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
+              className={`px-8 p-2 md:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/wishlists")}
                 `}
             >
@@ -217,7 +224,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
           {/* Classified Products */}
           <Link href={"/customer_products"}>
             {/* -------Desktop View----------- */}
-            <div className="hidden lg:block">
+            <div className="hidden md:block">
               <div
                 className={`px-8 p-2 cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/customer_products")}
@@ -240,7 +247,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
             {/* ---------Mobile View-------- */}
             <div
               onClick={() => setIsOpen(false)}
-              className={`px-8 p-2 lg:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
+              className={`px-8 p-2 md:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/customer_products")}
                 `}
             >
@@ -261,7 +268,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
           {/* My Wallet */}
           <Link href={"/wallet"}>
             {/* ---------Desktop View------ */}
-            <div className="hidden lg:block">
+            <div className="hidden md:block">
               <div
                 className={`px-8 p-2 cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/wallet")}
@@ -284,7 +291,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
             {/* ------Mobile View------ */}
             <div
               onClick={() => setIsOpen(false)}
-              className={`px-8 p-2 lg:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
+              className={`px-8 p-2 md:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/wallet")}
                 `}
             >
@@ -305,7 +312,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
           {/* Support Ticket */}
           <Link href={"/support_ticket"}>
             {/* -----------Desktop view--------- */}
-            <div className="hidden lg:block">
+            <div className="hidden md:block">
               <div
                 className={`px-8 p-2 cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/support_ticket")}
@@ -328,7 +335,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
             {/* -------Mobile View----- */}
             <div
               onClick={() => setIsOpen(false)}
-              className={`px-8 p-2 lg:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
+              className={`px-8 p-2 md:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/support_ticket")}
                 `}
             >
@@ -349,7 +356,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
           {/* Manage Profile */}
           <Link href={"/profile"}>
             {/* ---------Desktop View-------- */}
-            <div className="hidden lg:block">
+            <div className="hidden md:block">
               <div
                 className={`px-8 p-2 cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/profile")}
@@ -372,7 +379,7 @@ const PanelSidebar = ({ hide, width, setIsOpen, isOpen }) => {
             {/* -------Mobile View------- */}
             <div
               onClick={() => setIsOpen(false)}
-              className={`px-8 p-2 lg:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
+              className={`px-8 p-2 md:hidden cursor-pointer flex items-center justify-between border-l-[3px] border-white gap-2 hover:bg-red-200 hover:!border-red-500 
                  bg-white ${getActiveClass("/profile")}
                 `}
             >

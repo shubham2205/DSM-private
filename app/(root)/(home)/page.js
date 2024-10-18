@@ -1,7 +1,4 @@
-"use client";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import useSWR from "swr";
+import React from "react";
 import HeroDropdown from "../../../Components/HomeComponents/HeroHoverDropdown/index";
 import Banners from "../../../Components/HomeComponents/Banners/index";
 import SliderWithPName from "../../../Components/HomeComponents/SliderWithPName/index";
@@ -12,80 +9,40 @@ import BestSellerSection from "../../../Components/HomeComponents/BestSellerSect
 import TopCategories from "../../../Components/HomeComponents/Top12CategoriesSection/index";
 import TwoBanner from "../../../Components/HomeComponents/TwoBanner/index";
 import Top12Brands from "../../../Components/HomeComponents/Top12Brands/index";
-import Loading from "../../../Components/Loading";
 import Confetti from "../../../Components/confetti/index";
+import { getData } from "../../../lib/actions/universel.actions";
+import { revalidateTag } from "next/cache";
+import { isProductInWishlist } from "../../../lib/actions/wishlist.action";
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+const Home = async () => {
+  const homeData = await getData(`${process.env.NEXT_PUBLIC_API}/v3/home`);
+  const featuredData = await getData(
+    `${process.env.NEXT_PUBLIC_API}/v3/categories/featured`
+  );
+  const todayDeal = await getData(
+    `${process.env.NEXT_PUBLIC_API}/v3/products/todays-deal`
+  );
+  const top12brands = await getData(`${process.env.NEXT_PUBLIC_API}/v3/brands`);
+  const topCategories = await getData(
+    `${process.env.NEXT_PUBLIC_API}/v3/categories`
+  );
+  const HomeCategories = await getData(
+    `${process.env.NEXT_PUBLIC_API}/v3/categories/top`
+  );
+  const tag = revalidateTag("wishlist");
 
-export default function Home() {
-  const {
-    data: homeData,
-    error: homeError,
-    isValidating: homeValidating,
-  } = useSWR(`${process.env.NEXT_PUBLIC_API}/v3/home`, fetcher);
-
-  // console.log(homeData , "home data")
-
-  const {
-    data: featuredData,
-    error: featuredError,
-    isValidating: featuredValidating,
-  } = useSWR(`${process.env.NEXT_PUBLIC_API}/v3/categories/featured`, fetcher);
-
-  const {
-    data: todayDeal,
-    error: todayDealError,
-    isValidating: todayDealValidating,
-  } = useSWR(`${process.env.NEXT_PUBLIC_API}/v3/products/todays-deal`, fetcher);
-
-  const {
-    data: top12brands,
-    error: top12brandsError,
-    isValidating: top12brandsValidating,
-  } = useSWR(`${process.env.NEXT_PUBLIC_API}/v3/brands`, fetcher);
-
-  const {
-    data: topCategories,
-    error: topCategoriesError,
-    isValidating: topCategoriesValidating,
-  } = useSWR(`${process.env.NEXT_PUBLIC_API}/v3/categories`, fetcher);
-
-  if (
-    homeError ||
-    featuredError ||
-    todayDealError ||
-    top12brandsError ||
-    topCategoriesError
-  )
-    return <div>failed to load</div>;
-  if (
-    (!homeData && !homeError) ||
-    (!featuredData && !featuredError) ||
-    (!todayDeal && !todayDealError) ||
-    (!top12brands && !top12brandsError) ||
-    (!topCategories && !topCategoriesError)
-  )
-    return (
-      <div className="flex justify-center items-center">
-        <Loading />
-      </div>
-    );
-
-  // useEffect(() => {
-  //   console.log("Data fetched - ", homeData, featuredData, todayDeal, top12brands, topCategories);
-  // }, [homeData, featuredData, todayDeal, top12brands, topCategories]);
-
-  // console.log(homeData, "HHoommee DDaattaa")
+  const checkWishlistItem = isProductInWishlist();
 
   return (
     <main>
       <div>
-        <div className="w-[98%]">
+        <div className="!w-full">
           <Confetti />
         </div>
         <div className="bg-white">
-          <HeroDropdown data={homeData?.data?.category} />
-          <HomeBanner data={homeData?.data?.banners?.data?.banner1} />
+          <HeroDropdown data={HomeCategories} />
+          {/* <HeroDropdown data={homeData?.data?.category} /> */}
+          <HomeBanner data={homeData?.data?.banners?.data?.slider1_images} />
         </div>
         <SliderWithPName data={featuredData?.data} />
         <TodayDealSection
@@ -93,10 +50,14 @@ export default function Home() {
           banner={homeData?.data?.banners?.data?.banner1}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Featured Products"}
           data={homeData?.data?.featured?.data}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Best Selling"}
           btn={"Top 20"}
           data={homeData?.data?.top_sell?.data}
@@ -105,53 +66,75 @@ export default function Home() {
           <Banners data={homeData?.data?.banners?.data?.banner2} />
         </div>
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Arduino Board"}
           btn={"Top 20"}
           data={homeData?.data?.category[0].products.data}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"E-Bike Part"}
           btn={"Top 20"}
           data={homeData?.data?.category[1].products.data}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Arduino"}
           btn={"Top 20"}
           data={homeData?.data?.category[2].products.data}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Dc Geared Motors"}
           btn={"Top 20"}
           data={homeData?.data?.category[3].products.data}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Resberry pi"}
           btn={"Top 20"}
           data={homeData?.data?.category[4].products.data}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Other Components"}
           btn={"Top 20"}
           data={homeData?.data?.category[5].products.data}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Sensors"}
           btn={"Top 20"}
           data={homeData?.data?.category[6].products.data}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Drone Motors"}
           data={homeData?.data?.category[7].products.data}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Jumper Wire"}
           data={homeData?.data?.category[8].products.data}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Relay Board"}
           data={homeData?.data?.category[9].products.data}
         />
         <FeatureCardSlider
+          tag={tag}
+          checkWishlistItem={checkWishlistItem}
           title={"Jumper Wire"}
           data={homeData?.data?.category[10].products.data}
         />
@@ -170,4 +153,6 @@ export default function Home() {
       </div>
     </main>
   );
-}
+};
+
+export default Home;

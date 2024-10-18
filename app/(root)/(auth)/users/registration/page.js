@@ -3,11 +3,13 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { IoMdEyeOff } from "react-icons/io";
-import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "../../../../../Components/Modal";
 
 const Registration = () => {
+  const router = useRouter();
   const [useEmail, setUseEmail] = useState(false);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,7 +20,6 @@ const Registration = () => {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [enteredOtp, setEnteredOtp] = useState("");
-  const [receivedOtp, setReceivedOtp] = useState("");
   const [open, setOpen] = useState(false);
   const [userid, setUserid] = useState();
 
@@ -40,57 +41,6 @@ const Registration = () => {
     setUseEmail(!useEmail);
   };
 
-  const checkUserExists = async (emailOrPhone) => {
-    const formData = useEmail
-      ? { email: emailOrPhone }
-      : { phone: emailOrPhone };
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/v3/auth/check-user`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      const result = await response.json();
-      return response.ok && result.exists;
-    } catch (error) {
-      toast.error("An error occurred while checking user existence!");
-      return false;
-    }
-  };
-
-  const sendOtp = async (emailOrPhone) => {
-    const isEmail = emailOrPhone.includes("@");
-    const formData = isEmail
-      ? { email: emailOrPhone }
-      : { phone: emailOrPhone, countryCode: "+91" };
-
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/v3/auth/login-otp`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      const result = await response.json();
-      if (response.ok) {
-        toast.success(result.message);
-        setOpen(true);
-        setReceivedOtp(parseInt(result.otp));
-      } else {
-        toast.error(result.message || "OTP sending error!");
-      }
-    } catch (error) {
-      toast.error("An error occurred while sending OTP!");
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -99,47 +49,101 @@ const Registration = () => {
       return;
     }
 
-    const emailOrPhone = useEmail ? email : `${countryCode}${mobileNumber}`;
-    const userExists = await checkUserExists(emailOrPhone);
+    const formData = new FormData();
+    formData.append("name", fullName);
+    formData.append("email_or_phone", useEmail ? email : mobileNumber);
+    formData.append("password", password);
+    formData.append("register_by", useEmail ? "email" : "phone");
 
-    if (userExists) {
-      toast.error("User already registered");
-      return;
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/v3/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+          },
+          body: formData,
+        }
+      );
+
+      const result = await response.json();
+      if (result.success) {
+        toast.success(result.message);
+        setOpen(true);
+        setUserid(result?.user_id);
+        setFullName("");
+        setEmail("");
+        setMobileNumber("");
+        setPassword("");
+        setConfirmPassword("");
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error("Registration Error");
+      console.error("Error:", error); // Added for debugging
     }
-
-    sendOtp(emailOrPhone);
   };
 
   const handleOtpSubmit = async () => {
-    const emailOrPhone = useEmail ? email : `${countryCode}${mobileNumber}`;
-    const formData = {
-      name: fullName,
-      email_or_phone: emailOrPhone,
-      password,
-      register_by: useEmail ? "email" : "phone",
-      verification_code: enteredOtp,
-    };
+    const formData = new FormData();
+    formData.append("verification_code", enteredOtp);
+    formData.append("user_id", userid);
 
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API}/v3/auth/confirm_code`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          headers: {
+            Accept: "application/json",
+          },
+          body: formData,
         }
       );
 
       const result = await response.json();
-      if (response.ok) {
-        toast.success("OTP matched! Registration successful.");
-        setUserid(result?.user_id);
+      if (result.success) {
+        toast.success(result.message);
+        router.push("login");
         setOpen(false);
+        setEnteredOtp("");
       } else {
-        toast.error(result.message || "Invalid OTP!");
+        toast.error(result.message);
       }
     } catch (error) {
-      toast.error("Network error!");
+      toast.error("Otp Error");
+      console.error("Error:", error);
+    }
+  };
+
+  const handleResentOtp = async () => {
+    const formData = new FormData();
+    formData.append("verify_by", useEmail ? "email" : "phone");
+    formData.append("user_id", userid);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/v3/auth/resend_code`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+          },
+          body: formData,
+        }
+      );
+
+      const result = await response.json();
+      if (result.success) {
+        toast.success(result.message);
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error("Otp Error");
+      console.error("Error:", error);
     }
   };
 
@@ -155,7 +159,9 @@ const Registration = () => {
               className="w-full bg-white text-black mt-1 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-red-500"
               placeholder="Full Name"
               value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              onChange={(e) =>
+                setFullName(e.target.value.replace(/[^a-z ]/gi, ""))
+              }
               required
             />
           </div>
@@ -182,7 +188,6 @@ const Registration = () => {
                     required
                   >
                     <option value="+91">🇮🇳 +91</option>
-                    <option value="+1">🇺🇸 +1</option>
                   </select>
                   <input
                     type="number"
@@ -281,7 +286,7 @@ const Registration = () => {
           <div className="flex flex-col items-center justify-center mt-6">
             <p className="text-sm text-gray-600">Already have an account? </p>
             <p className="font-thin text-xs text-gray-600">
-              <Link href={`/login`}>Log In</Link>
+              <Link href={`users/login`}>Log In</Link>
             </p>
           </div>
         </form>
@@ -297,7 +302,12 @@ const Registration = () => {
                 Verification code has been sent. Please wait a few minutes.
               </p>
               <div className="text-center mb-6">
-                <button className="text-red-500">Resend Code</button>
+                <button
+                  className="text-red-500"
+                  onClick={() => handleResentOtp()}
+                >
+                  Resend Code
+                </button>
               </div>
               <div className="mb-4">
                 <input
@@ -319,7 +329,6 @@ const Registration = () => {
           </div>
         </Modal>
       )}
-      <ToastContainer theme="colored" hideProgressBar />
     </div>
   );
 };

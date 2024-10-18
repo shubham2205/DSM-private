@@ -1,48 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../../app/styles/CustomScrollbar.module.css";
-// import ProductCard from "../Cards/ProductCard/ProductCard";
 import { BiChevronDown } from "react-icons/bi";
 import { LiaFilterSolid } from "react-icons/lia";
-import useSWR from "swr";
-import { useRouter } from "next/navigation";
-import { IoMdClose } from "react-icons/io";
 import Link from "next/link";
 import ProductCard from "../Cards/ProductCard";
 import Drawer from "../Drawer";
-// import { Slider } from "@/components/ui/slider"
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
-
-export default function SidebarWithProduct({ datas }) {
-  const router = useRouter();
-  // const { id } = router.query;
+const SidebarWithProduct = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
   const [openBrandDropdown, setOpenBrandDropdown] = useState(false);
   const [openSortDropdown, setOpenSortDropdown] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
-  const { data, error, isValidating } = useSWR(
-    `${process.env.NEXT_PUBLIC_API}/v3/brands`,
-    fetcher
-  );
-
-  // useEffect(() => {
-  //   if (id && data?.data) {
-  //     const matchingBrand = data.data.find(
-  //       (brand) => brand.id === parseInt(id)
-  //     );
-  //     if (matchingBrand) {
-  //       setSelectedBrand(matchingBrand.name);
-  //     }
-  //   }
-  // }, [id, data]);
-
-  // if (error) return <div>failed to load</div>;
-  // if (!data && !error) return <div>loading...</div>;
 
   const handleBrandSelect = (brandName) => {
     setSelectedBrand(brandName);
@@ -63,35 +35,14 @@ export default function SidebarWithProduct({ datas }) {
           <h2 className="font-bold text-lg mb-1">Categories</h2>
           <hr className="mb-4" />
           <ul>
-            {[
-              "Communication",
-              "Arduino",
-              "Raspberry Pi",
-              "Motors",
-              "Sensors",
-              "Robot Parts",
-              "Drone Parts",
-              "Development Board",
-              "Programmers",
-              "Batteries & Chargers",
-              "Power Supply",
-              "Communication",
-              "Arduino",
-              "Raspberry Pi",
-              "Motors",
-              "Sensors",
-              "Robot Parts",
-              "Drone Parts",
-              "Development Board",
-              "Programmers",
-              "Batteries & Chargers",
-              "Power Supply",
-            ].map((category) => (
-              <li key={category} className="py-2 text-gray-700">
-                {category}
-                <hr />
-              </li>
-            ))}
+            {data &&
+              data?.length > 0 &&
+              data?.map((ele, i) => (
+                <li key={i} className="py-2 text-gray-700 cursor-pointer">
+                  {ele?.name}
+                  <hr />
+                </li>
+              ))}
           </ul>
         </div>
 
@@ -161,7 +112,7 @@ export default function SidebarWithProduct({ datas }) {
       >
         <div className="">
           <span className="text-gray-400 text-sm">Home</span>
-          <span> / "All categories"</span>
+          <span> / All categories</span>
         </div>
 
         <div className="grid grid-cols-4 items-center my-10 gap-3">
@@ -282,7 +233,7 @@ export default function SidebarWithProduct({ datas }) {
 
         {/* ----------------------------------All Product Start---------------------- */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {datas?.map((datas) => (
+          {data?.map((datas) => (
             <div className="" key={datas?.id}>
               <Link href={`/product/${datas?.id}`}>
                 <ProductCard wid={"w-full"} cardData={datas} />
@@ -296,4 +247,6 @@ export default function SidebarWithProduct({ datas }) {
       </section>
     </main>
   );
-}
+};
+
+export default SidebarWithProduct;

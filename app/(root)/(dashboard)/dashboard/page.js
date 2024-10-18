@@ -1,19 +1,18 @@
 import React from "react";
 import PanelSidebar from "../../../../Components/MyPanel/PanelSidebar";
-// import PanelSidebar from "../PanelSidebar/PanelSidebar";
+import { getUserProfile } from "../../../../lib/actions/profile.actions";
 
-const Dashboard = () => {
+const Dashboard = async () => {
+  const userData = await getUserProfile();
   return (
     <>
-      <div className="flex sm:px-14 mt-12 gap-6">
-       
-          <PanelSidebar />
-        
-
-        <section className="w-full  xl:w-4/5 h-auto">
+      <div className="">
+        {/* <PanelSidebar data={userData} /> */}
+        <p>Dashboard</p>
+        <section className="w-full   h-auto">
           <div>
             {/* ----------------------------Section First Product Carts Start----------------- */}
-            <div className="w-full grid grid-cols-1 md:grid-cols-3 mt-10 gap-4 ">
+            <div className="w-full grid grid-cols-1 md:grid-cols-3 mt-8 gap-4 ">
               {/* First Box */}
               <div className="bg-[#6382F3] w-full rounded-md">
                 <div className="px-4 pb-2 pt-4 ">
@@ -93,5 +92,4 @@ const Dashboard = () => {
   );
 };
 
-
-export default Dashboard
+export default Dashboard;

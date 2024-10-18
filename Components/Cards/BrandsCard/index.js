@@ -5,11 +5,11 @@ import Link from "next/link";
 import React from "react";
 
 const BrandCard = ({ data }) => {
-  // console.log(data, "from BB");
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 ">
       {data &&
+        data?.length > 0 &&
         data?.map((item, i) => (
           <div key={i} className="w-full">
             <Link href={`/brands/${i}`}>

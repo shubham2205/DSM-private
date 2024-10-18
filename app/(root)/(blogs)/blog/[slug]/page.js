@@ -1,24 +1,11 @@
-"use client";
-
-import { usePathname } from "next/navigation";
 import React from "react";
-import useSWR from "swr";
 import OurBlogCardDetail from "../../../../../Components/Cards/OurBlogCardDetail";
+import { getData } from "../../../../../lib/actions/universel.actions";
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
-
-const BlogDetails = () => {
-  const { id } = usePathname();
-
-  const {
-    data: blogDetailData,
-    error: blogError,
-    isValidating,
-  } = useSWR(`${process.env.NEXT_PUBLIC_API}/v3/blog-detail/${id}`, fetcher);
-
-  if (blogError) return <section>failed to load</section>;
-  if (!blogDetailData && !blogError) return <section>loading...</section>;
-  // console.log(blogDetailData , "blog D")
+const BlogDetails = async ({ params }) => {
+  const blogDetailData = await getData(
+    `${process.env.NEXT_PUBLIC_API}/v3/blog-detail/${params.slug}`
+  );
 
   return (
     <main>

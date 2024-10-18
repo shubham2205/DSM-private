@@ -1,15 +1,40 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import SearchDropdown from "../SearchDropdown";
 
-const DeliveryStep = () => {
-  const data = ["India", "Pakistan", "china", "Landon", "puri", "brazile","India", "Pakistan", "china", "Landon", "puri", "brazile","India", "Pakistan", "china", "Landon", "puri", "brazile","India", "Pakistan", "china", "Landon", "puri", "brazile"];
+const DeliveryStep = ({ data }) => {
+  const address = [
+    "India",
+    "Pakistan",
+    "china",
+    "Landon",
+    "puri",
+    "brazile",
+    "India",
+    "Pakistan",
+    "china",
+    "Landon",
+    "puri",
+    "brazile",
+    "India",
+    "Pakistan",
+    "china",
+    "Landon",
+    "puri",
+    "brazile",
+    "India",
+    "Pakistan",
+    "china",
+    "Landon",
+    "puri",
+    "brazile",
+  ];
   const [deliveryType, setDeliveryType] = useState("localPickup");
   const [selectedCountry, setSelectedCountry] = useState("");
 
-  const brands = data?.map((brand) => brand) || [];
+  const brands = address?.map((brand) => brand) || [];
   const fileInputRef = useRef(null);
 
   return (
@@ -17,12 +42,22 @@ const DeliveryStep = () => {
       <h2 className="text-md font-semibold mb-4 border-b pb-3">
         DSM Online Products
       </h2>
-      <div className="flex items-center mb-4 pb-6 border-b">
-        <Image src={""} alt="Product" className="w-12 h-12 mr-4 text-xs" />
-        <span className="text-gray-700 font-thin text-sm">
-          HIW Hi-Waote 6F22 9 Volts High Power Long Life Batteries pack 5
-        </span>
-      </div>
+      {data?.data &&
+        data?.data?.length > 0 &&
+        data?.data?.map((ele, i) => (
+          <div key={i} className="flex items-center mb-4 pb-6 border-b">
+            <Image
+              src={`${process.env.NEXT_PUBLIC_URL}/${ele?.product_thumbnail_image}`}
+              height={100}
+              width={100}
+              alt="Product"
+              className="w-12 h-12 mr-4 text-xs"
+            />
+            <span className="text-gray-700  text-sm">
+              {ele?.product_name}
+            </span>
+          </div>
+        ))}
 
       <div className=" flex justify-between flex-wrap">
         <h3 className="text-md font-medium mb-2">Choose Delivery Type</h3>

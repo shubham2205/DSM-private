@@ -1,9 +1,9 @@
-"use client"
-
 import React from "react";
 import BulkOrderForm from "../../../../Components/Forms/BulkOrderForm";
+import { getData } from "../../../../lib/actions/universel.actions";
 
-const BulkOrder = () => {
+const BulkOrder = async () => {
+  const allProducts = await getData(`${process.env.NEXT_PUBLIC_API}/v3/products/search`);
   return (
     <div className="bg-defaultBg">
       <div className="flex justify-center  flex-col lg:flex-row md:justify-between items-center">
@@ -16,7 +16,7 @@ const BulkOrder = () => {
       </div>
 
       <div className="flex justify-center mt-6">
-        <BulkOrderForm />
+        <BulkOrderForm products={allProducts?.data}/>
       </div>
     </div>
   );

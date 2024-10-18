@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
 
-export default () => {
+const ConfettiComponent = () => {
   const { width, height } = useWindowSize();
   const [confettiPieces, setConfettiPieces] = useState(500);
 
@@ -21,10 +21,14 @@ export default () => {
 
   return (
     <Confetti
-      width={width-20}
+      width={width - 20}
       height={height}
       numberOfPieces={confettiPieces}
       onConfettiComplete={handleConfettiComplete}
     />
   );
 };
+
+ConfettiComponent.displayName = "ConfettiComponent";
+
+export default ConfettiComponent;

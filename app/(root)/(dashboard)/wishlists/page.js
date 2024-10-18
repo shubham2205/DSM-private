@@ -1,15 +1,28 @@
+
+
+
+
+
+import { Suspense } from 'react';
 import { getUserWishlist } from "../../../../lib/actions/wishlist.action";
 import WishlistClient from "../../../../Components/WishlistClient/WishlistClient";
 import { getData } from "../../../../lib/actions/universel.actions";
-import { cookiesData } from "../../../../lib/actions/auth.actions";
-import { revalidateTag } from "next/cache";
+import { cookies } from 'next/headers';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const WishlistPage = async () => {
-  const wishlistData = await getUserWishlist();
-  const userId = await cookiesData("userId");
-  const tag =  revalidateTag("wishlist"); 
+  const cookieStore = cookies();
+  const userId = cookieStore.get('userId')?.value;
 
-  return <WishlistClient wishlistData={wishlistData}  userId={userId} tag={tag}/>;
+  const wishlistData = await getUserWishlist();
+
+  return (
+    <Suspense fallback={<div>Loading wishlist...</div>}>
+      <WishlistClient wishlistData={wishlistData} userId={userId} />
+    </Suspense>
+  );
 };
 
 export default WishlistPage;

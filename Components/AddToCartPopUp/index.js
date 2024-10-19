@@ -23,7 +23,7 @@ const AddToCartPopUp = ({
   
 }) => {
   const selectedProduct = wishlistData?.data?.[selectedIndex];
-  console.log("selectedProduct from last ::", selectedProduct);
+  // console.log("selectedProduct from last ::", selectedProduct);
 
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [isItemAddPopUp, setIsItemAddPopUp] = useState(false);

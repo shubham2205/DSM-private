@@ -14,7 +14,7 @@ import { removeFromWishlist } from "../../lib/actions/wishlist.action";
 import { toast } from "react-toastify";
 
 const WishlistClient = ({ wishlistData, data, userId, tag }) => {
-  console.log("wishlist Data from main", wishlistData, "");
+  // console.log("wishlist Data from main", wishlistData, "");
   const [isAddToCartPppUp, setIsAddToCartPppUp] = useState({
     isOpen: false,
     selectedIndex: null,

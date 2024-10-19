@@ -6,7 +6,7 @@ import Link from "next/link";
 import SliderPerview2 from "../../Slider/SliderPerview2";
 import ProductCard from "../../Cards/ProductCard";
 
-const FeatureCardSlider = ({ title, btn, data,tag ,checkWishlistItem}) => {
+const FeatureCardSlider = ({ title, btn, data,tag ,checkWishlistItem, userId}) => {
   return (
     <div className="w-full bg-white pt-3 lg:pt-0  px-2 md:p-5 my-6 ">
       <div className=" pt-3">
@@ -30,7 +30,7 @@ const FeatureCardSlider = ({ title, btn, data,tag ,checkWishlistItem}) => {
               return (
                 <SwiperSlide key={index} className="">
                   <Link href={`/product/${cardData?.id}`}>
-                    <ProductCard cardData={cardData} tag={tag}  checkWishlistItem={checkWishlistItem}/>
+                    <ProductCard cardData={cardData} tag={tag} userId={userId}  checkWishlistItem={checkWishlistItem}/>
                   </Link>
                 </SwiperSlide>
               );

@@ -1,9 +1,28 @@
 import React from "react";
 import PanelSidebar from "../../../../Components/MyPanel/PanelSidebar";
 import { getUserProfile } from "../../../../lib/actions/profile.actions";
+import { getAllCards } from "../../../../lib/actions/cart.actions";
+import { getUserWishlist } from "../../../../lib/actions/wishlist.action";
+import { getNoOfOrders } from "../../../../lib/actions/getOrders.action";
+import { getAddress } from "../../../../lib/actions/address.actions";
 
 const Dashboard = async () => {
-  const userData = await getUserProfile();
+  const ItemsInCart = await getAllCards();
+  const ItemsInWishlist = await getUserWishlist();
+  const TotalNoOfOrder = await getNoOfOrders();
+
+  const NoOfItemsInCart = ItemsInCart?.data?.length || 0;
+  const NoOfItemsInWishlist = ItemsInWishlist?.data?.length || 0;
+  const NoOfOrder = TotalNoOfOrder?.data?.length || 0;
+
+  const allAddress = await getAddress();
+  // console.log("allAddress", allAddress.data);
+
+  const defaultAddresses = allAddress.data.filter(
+    (address) => address.set_default === 1
+  );
+  // console.log("defaultAddresses", defaultAddresses);
+
   return (
     <>
       <div className="">
@@ -17,7 +36,7 @@ const Dashboard = async () => {
               <div className="bg-[#6382F3] w-full rounded-md">
                 <div className="px-4 pb-2 pt-4 ">
                   <div className=" text-white text-2xl font-semibold ">
-                    1 Product(s)
+                    {NoOfItemsInCart} Product(s)
                   </div>
                   <div className=" text-white text-sm  opacity-50">
                     in your cart
@@ -34,7 +53,7 @@ const Dashboard = async () => {
               <div className="bg-[#FF471E] w-full rounded-md">
                 <div className="px-4 pb-2 pt-4 ">
                   <div className=" text-white text-2xl font-semibold ">
-                    1 Product(s)
+                    {NoOfItemsInWishlist} Product(s)
                   </div>
                   <div className=" text-white text-sm  opacity-50">
                     in your wishlist
@@ -51,7 +70,7 @@ const Dashboard = async () => {
               <div className="bg-[#454444] w-full rounded-md">
                 <div className="px-4 pb-2 pt-4 ">
                   <div className=" text-white text-2xl font-semibold ">
-                    1 Product(s)
+                    {NoOfOrder} Product(s)
                   </div>
                   <div className=" text-white text-sm  opacity-50">
                     {" "}
@@ -71,6 +90,16 @@ const Dashboard = async () => {
             <div className="grid grid-cols-1 md:grid-cols-2  mt-6 gap-3">
               <div className="bg-white rounded-md shadow-sm">
                 <h4 className="px-6 py-2">Default Shipping Address</h4>
+                {defaultAddresses.map((address) => (
+                  <div key={address.id} className="px-6 py-2">
+                    <p>{address.address}</p>
+                    <p>
+                      {address.city}, {address.state}, {address.country}
+                    </p>
+                    <p>{address.postal_code}</p>
+                    <p>Phone: {address.phone}</p>
+                  </div>
+                ))}
                 <hr className="mb-6" />
               </div>
               <div className="bg-white rounded-md shadow-sm">

@@ -13,8 +13,10 @@ import Confetti from "../../../Components/confetti/index";
 import { getData } from "../../../lib/actions/universel.actions";
 import { revalidateTag } from "next/cache";
 import { isProductInWishlist } from "../../../lib/actions/wishlist.action";
+import { cookiesData } from "../../../lib/actions/auth.actions";
 
 const Home = async () => {
+  const userId = await cookiesData("userId");
   const homeData = await getData(`${process.env.NEXT_PUBLIC_API}/v3/home`);
   const featuredData = await getData(
     `${process.env.NEXT_PUBLIC_API}/v3/categories/featured`
@@ -50,12 +52,14 @@ const Home = async () => {
           banner={homeData?.data?.banners?.data?.banner1}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Featured Products"}
           data={homeData?.data?.featured?.data}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Best Selling"}
@@ -66,6 +70,7 @@ const Home = async () => {
           <Banners data={homeData?.data?.banners?.data?.banner2} />
         </div>
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Arduino Board"}
@@ -73,6 +78,7 @@ const Home = async () => {
           data={homeData?.data?.category[0].products.data}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"E-Bike Part"}
@@ -80,6 +86,7 @@ const Home = async () => {
           data={homeData?.data?.category[1].products.data}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Arduino"}
@@ -87,6 +94,7 @@ const Home = async () => {
           data={homeData?.data?.category[2].products.data}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Dc Geared Motors"}
@@ -94,6 +102,7 @@ const Home = async () => {
           data={homeData?.data?.category[3].products.data}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Resberry pi"}
@@ -101,6 +110,7 @@ const Home = async () => {
           data={homeData?.data?.category[4].products.data}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Other Components"}
@@ -108,6 +118,7 @@ const Home = async () => {
           data={homeData?.data?.category[5].products.data}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Sensors"}
@@ -115,24 +126,28 @@ const Home = async () => {
           data={homeData?.data?.category[6].products.data}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Drone Motors"}
           data={homeData?.data?.category[7].products.data}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Jumper Wire"}
           data={homeData?.data?.category[8].products.data}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Relay Board"}
           data={homeData?.data?.category[9].products.data}
         />
         <FeatureCardSlider
+          userId={userId}
           tag={tag}
           checkWishlistItem={checkWishlistItem}
           title={"Jumper Wire"}

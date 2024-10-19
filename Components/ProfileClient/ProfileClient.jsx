@@ -102,7 +102,7 @@ const ProfileClient = ({ userDets, addressData, tag }) => {
 
   const [selectedAddress, setSelectedAddress] = useState();
 
-  console.log("selectedAddress ID: ", selectedAddress);
+  // console.log("selectedAddress ID: ", selectedAddress);
 
   const [address, setAddress] = useState(selectedAddress?.address || "");
   const [countries, setCountries] = useState([]);

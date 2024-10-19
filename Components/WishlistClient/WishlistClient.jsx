@@ -1,9 +1,4 @@
-"use client";
-
-//wishlist main page
-
 import Image from "next/image";
-import { revalidateTag } from "next/cache";
 import React, { useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
 import { LiaShoppingCartSolid } from "react-icons/lia";
@@ -13,8 +8,7 @@ import RatingStar from "../RatingStar";
 import { removeFromWishlist } from "../../lib/actions/wishlist.action";
 import { toast } from "react-toastify";
 
-const WishlistClient = ({ wishlistData, data, userId, tag }) => {
-  // console.log("wishlist Data from main", wishlistData, "");
+const WishlistClient = ({ wishlistData, userId, tag }) => {
   const [isAddToCartPppUp, setIsAddToCartPppUp] = useState({
     isOpen: false,
     selectedIndex: null,
@@ -32,14 +26,12 @@ const WishlistClient = ({ wishlistData, data, userId, tag }) => {
       const result = await removeFromWishlist(productId);
       if (result?.success) {
         toast.success(result.message);
-        tag;
+        tag;  // This should trigger the revalidation of the wishlist
       } else {
         toast.error("Failed to remove product from wishlist");
       }
     } catch (error) {
-      toast.error(
-        "An error occurred while removing the product from the wishlist"
-      );
+      toast.error("An error occurred while removing the product from the wishlist");
     }
   };
 

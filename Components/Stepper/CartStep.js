@@ -3,6 +3,7 @@ import React from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { changeItemQuantity, removeCard } from "../../lib/actions/cart.actions";
 import { toast } from "react-toastify";
+import { icons } from "lucide-react";
 
 const CartStep = ({ data }) => {
   const changeQuantity = async (proId, quantity) => {
@@ -42,19 +43,17 @@ const CartStep = ({ data }) => {
           </thead>
           <tbody>
             {data?.data?.map((ele, i) => (
-              <>
-                <tr>
+              <React.Fragment key={i}>
+                <tr >
                   <td className="my-5 p-2 flex items-center">
                     <Image
+                      src={`${process.env.NEXT_PUBLIC_URL}/${ele?.product_thumbnail_image}`}
                       width={700}
                       height={700}
-                      src={`${process.env.NEXT_PUBLIC_URL}/${ele?.product_thumbnail_image}`}
                       alt="Product"
                       className="w-16 h-16 object-cover mr-2 text-xs"
                     />
-                    <span className="text-gray-500 ">
-                      {ele?.product_name}
-                    </span>
+                    <span className="text-gray-500 ">{ele?.product_name}</span>
                   </td>
                   <td className="my-5p-2  text-left ">
                     {ele?.currency_symbol}
@@ -118,7 +117,7 @@ const CartStep = ({ data }) => {
                     ₹153
                   </td>
                 </tr>
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>
@@ -127,13 +126,13 @@ const CartStep = ({ data }) => {
       {/* -------------------- mobile-view------------ */}
       <div className="lg:hidden bg-white shadow p-3">
         <div className="flex gap-5">
-          <Image
+          {/* <Image
             width={700}
             height={700}
             src={""}
             alt="Product"
             className="w-16 h-16 object-cover mr-2 text-xs"
-          />
+          /> */}
           <p className="text-gray-500  text-xs">
             HIW Hi-Waote 6F22 9 Volts High Power Long Life Batteries pack 5
           </p>

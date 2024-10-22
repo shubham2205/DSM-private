@@ -40,6 +40,7 @@ const ShippingStep = ({ data, userId }) => {
   const [allStates, setAllStates] = useState(null);
   const [allCity, setAllCity] = useState(null);
   const [allPincode, setAllPincode] = useState(null);
+  const [defaultAddressIndex, setDefaultAddressIndex] = useState(null);
 
   const handleModalOpen = () => {
     setModalOpen(true);
@@ -49,7 +50,7 @@ const ShippingStep = ({ data, userId }) => {
     setModalOpen(false);
   };
 
-  // for getting countries
+  // Fetch countries
   useEffect(() => {
     const getCountry = async () => {
       try {
@@ -67,7 +68,7 @@ const ShippingStep = ({ data, userId }) => {
     getCountry();
   }, []);
 
-  // for getting states
+  // Fetch states
   useEffect(() => {
     const getStates = async () => {
       try {
@@ -85,7 +86,7 @@ const ShippingStep = ({ data, userId }) => {
     getStates();
   }, [selectedCountry]);
 
-  // getting all cities
+  // Fetch cities
   useEffect(() => {
     const getCity = async () => {
       try {
@@ -103,7 +104,7 @@ const ShippingStep = ({ data, userId }) => {
     getCity();
   }, [selectedState]);
 
-  // getting all pincode
+  // Fetch pincodes
   useEffect(() => {
     const getPincode = async () => {
       try {
@@ -121,7 +122,7 @@ const ShippingStep = ({ data, userId }) => {
     getPincode();
   }, [selectedCity]);
 
-  // empty address form
+  // Reset form when adding a new address or edit the existing address
   useEffect(() => {
     if (addUpdate) {
       setSelectedCountry("");
@@ -144,7 +145,7 @@ const ShippingStep = ({ data, userId }) => {
     }
   }, [addUpdate, selectAddress]);
 
-  // update address
+  // Update the address
   const addressUpdate = async () => {
     const formData = new FormData();
     formData.append("id", selectAddress?.id);
@@ -166,7 +167,7 @@ const ShippingStep = ({ data, userId }) => {
     }
   };
 
-  // add new address
+  // Add a new address
   const addAddress = async () => {
     const formData = new FormData();
     formData.append("user_id", userId);
@@ -188,7 +189,7 @@ const ShippingStep = ({ data, userId }) => {
     }
   };
 
-  // delete address
+  // Delete an address
   const deleteAddress = async (id) => {
     try {
       const result = await addressDelete(id);
@@ -202,6 +203,11 @@ const ShippingStep = ({ data, userId }) => {
     }
   };
 
+  // Select address to be default
+  // const handleAddressSelect = (index) => {
+  //   setDefaultAddressIndex(index);
+  // };
+
   const countryList =
     (allCountry?.countries && allCountry?.countries?.map((ele) => ele.name)) ||
     [];
@@ -214,6 +220,10 @@ const ShippingStep = ({ data, userId }) => {
       allPincode?.pincodes?.map((ele) => String(ele?.code))) ||
     [];
 
+    const handleAddressSelect = (index) => {
+      setDefaultAddressIndex(index); 
+    };
+    
   return (
     <>
       {/* ------------modal for edit address------------------- */}
@@ -357,89 +367,125 @@ const ShippingStep = ({ data, userId }) => {
       }
       <div className="flex justify-center items-center">
         <div className="flex gap-4 flex-wrap bg-white lg:w-[70%] shadow p-2 lg:p-6 ">
-          {data &&
-            data?.length > 0 &&
-            data?.map((ele, i) => (
+          {/* {data?.map((ele, i) => (
+            <div
+              key={i}
+              className="border w-full lg:w-[49%] border-red-400 rounded lg:p-1 relative"
+            >
               <div
-                key={i}
-                className="border w-full lg:w-[49%] border-red-400 rounded lg:p-1 relative"
+                className="text-right"
+                onClick={() => {
+                  setSelecteAddIndex(i);
+                  if (selectAddIndex === i) {
+                    setIsHovered(!isHovered);
+                  }
+                }}
               >
-                <div
-                  className="text-right"
-                  // onMouseEnter={() => setIsHovered(true)}
-                  onClick={() => {
-                    setSelecteAddIndex(i);
-                    if (selectAddIndex === i) {
-                      setIsHovered(!isHovered);
-                    }
-                  }}
-                  // onMouseLeave={() => setIsHovered(false)}
-                >
-                  <button className="absolute right-0 ">
-                    <HiOutlineDotsVertical />
-                  </button>
-                  {isHovered && selectAddIndex === i && (
-                    <div className="absolute top-0 right-0 mt-8 p-2 bg-white border rounded shadow-lg">
-                      <button
-                        onClick={() => {
-                          setSelectAddress(ele);
-                          setAddUpdate(false);
-                          setIsModalEditAddress(true);
-                        }}
-                        className="block text-gray-700 hover:bg-gray-100 text-left xl:w-40 py-1"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          deleteAddress(ele?.id);
-                        }}
-                        className="block text-gray-700 hover:bg-gray-100 text-left xl:w-40 py-1"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </div>
-                <div className="flex items-start mb-2">
-                  <input
-                    type="radio"
-                    // className="mt-1 text-red-500"
-                    className="appearance-none w-4 h-4 border-2 bg-white border-red-500 rounded-full"
-                    checked
-                    readOnly
-                  />
-                  <div className="ml-2">
-                    <p className="text-sm font-semibold capitalize my-1">
-                      <span className="text-gray-500 text-xs">Address:</span>{" "}
-                      {ele?.address}
-                    </p>
-                    <p className="text-sm font-semibold capitalize">
-                      <span className="text-gray-500 text-xs">Pin Code:</span>{" "}
-                      {ele?.postal_code}
-                    </p>
-                    <p className="text-sm font-semibold capitalize my-1">
-                      <span className="text-gray-500 text-xs">City:</span>{" "}
-                      {ele?.city}
-                    </p>
-                    <p className="text-sm font-semibold capitalize my-1">
-                      <span className="text-gray-500 text-xs">State:</span>{" "}
-                      {ele?.state}
-                    </p>
-                    <p className="text-sm font-semibold capitalize my-1">
-                      <span className="text-gray-500 text-xs">Country:</span>{" "}
-                      {ele?.country}
-                    </p>
-                    <p className="text-sm font-semibold capitalize my-1">
-                      <span className="text-gray-500 text-xs">Phone:</span>{" "}
-                      {ele?.phone}
-                    </p>
+                <button className="absolute right-0 ">
+                  <HiOutlineDotsVertical />
+                </button>
+                {isHovered && selectAddIndex === i && (
+                  <div className="absolute top-0 right-0 mt-8 p-2 bg-white border rounded shadow-lg">
+                    <button
+                      onClick={() => {
+                        setSelectAddress(ele);
+                        setAddUpdate(false);
+                        setIsModalEditAddress(true);
+                      }}
+                      className="block text-gray-700 hover:bg-gray-100 text-left xl:w-40 py-1"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        deleteAddress(ele?.id);
+                      }}
+                      className="block text-gray-700 hover:bg-gray-100 text-left xl:w-40 py-1"
+                    >
+                      Delete
+                    </button>
                   </div>
+                )}
+              </div>
+              <div className="flex items-start mb-2">
+                <input
+                  type="radio"
+                  className="appearance-none w-4 h-4 border-2 bg-white border-red-500 rounded-full"
+                  checked={defaultAddressIndex === i} // Check if this address is the default
+                  onChange={() => handleAddressSelect(i)} // Set this address as the default when selected
+                />
+                <div className="ml-2">
+                  <p className="text-sm font-semibold capitalize my-1">
+                    <span className="text-gray-500 text-xs">Address:</span>{" "}
+                    {ele?.address}
+                  </p>
+                  <p className="text-sm font-semibold capitalize">
+                    <span className="text-gray-500 text-xs">Pin Code:</span>{" "}
+                    {ele?.postal_code}
+                  </p>
+                  <p className="text-sm font-semibold capitalize my-1">
+                    <span className="text-gray-500 text-xs">City:</span>{" "}
+                    {ele?.city}
+                  </p>
+                  <p className="text-sm font-semibold capitalize my-1">
+                    <span className="text-gray-500 text-xs">State:</span>{" "}
+                    {ele?.state}
+                  </p>
+                  <p className="text-sm font-semibold capitalize my-1">
+                    <span className="text-gray-500 text-xs">Country:</span>{" "}
+                    {ele?.country}
+                  </p>
+                  <p className="text-sm font-semibold capitalize my-1">
+                    <span className="text-gray-500 text-xs">Phone:</span>{" "}
+                    {ele?.phone}
+                  </p>
                 </div>
               </div>
-            ))}
+            </div>
+          ))} */}
 
+          {data?.map((ele, i) => (
+            <div
+              key={i}
+              className="border w-full lg:w-[49%] border-red-400 rounded lg:p-1 relative"
+            >
+              <div className="flex items-start mb-2">
+                <input
+                  type="radio"
+                  className="appearance-none w-4 h-4 border-2 bg-white border-red-500 rounded-full checked:bg-blue-500 "
+                  checked={defaultAddressIndex === i} 
+                  onChange={() => handleAddressSelect(i)} 
+                />
+                <div className="ml-2">
+                  <p className="text-sm font-semibold capitalize my-1">
+                    <span className="text-gray-500 text-xs">Address:</span>{" "}
+                    {ele?.address}
+                  </p>
+                  <p className="text-sm font-semibold capitalize">
+                    <span className="text-gray-500 text-xs">Pin Code:</span>{" "}
+                    {ele?.postal_code}
+                  </p>
+                  <p className="text-sm font-semibold capitalize my-1">
+                    <span className="text-gray-500 text-xs">City:</span>{" "}
+                    {ele?.city}
+                  </p>
+                  <p className="text-sm font-semibold capitalize my-1">
+                    <span className="text-gray-500 text-xs">State:</span>{" "}
+                    {ele?.state}
+                  </p>
+                  <p className="text-sm font-semibold capitalize my-1">
+                    <span className="text-gray-500 text-xs">Country:</span>{" "}
+                    {ele?.country}
+                  </p>
+                  <p className="text-sm font-semibold capitalize my-1">
+                    <span className="text-gray-500 text-xs">Phone:</span>{" "}
+                    {ele?.phone}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
           {/* ---------------right side------- */}
           <div
             className="border w-full lg:w-[49%]  border-gray-200 rounded flex items-center justify-center p-4 cursor-pointer"

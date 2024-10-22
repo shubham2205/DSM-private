@@ -89,6 +89,7 @@ const ProductDetail = ({
     );
     if (result.result) {
       toast.success(result.message);
+      // toast.success(result.cart_id);
     } else {
       toast.error(result.message);
     }

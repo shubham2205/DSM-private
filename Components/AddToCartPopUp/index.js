@@ -88,7 +88,7 @@ const AddToCartPopUp = ({
       formData
     );
     if (result.result) {
-      // toast.success(result.message);
+      // toast.success(result.cart_id);
       setIsItemAddPopUp(true);
     } else {
       toast.error(result.message);

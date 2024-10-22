@@ -1,15 +1,49 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getPaymentTypes } from "../../lib/actions/paymentOption.action";
+import { getCartSummary } from "../../lib/actions/cart.actions";
 
-const PaymentStep = () => {
+const PaymentStep = ({ data, userId }) => {
+  const [paymentOption, setPaymentOption] = useState([]);
+  const [CartSummary, setCartSummary] = useState([]);
+
+  useEffect(() => {
+    const fetchPaymentOptions = async () => {
+      try {
+        const res = await getPaymentTypes();
+        // console.log(res, "GetPaymentOption");
+        setPaymentOption(res.data);
+      } catch (error) {
+        console.error("Error fetching payment options:", error);
+      }
+    };
+
+    fetchPaymentOptions();
+  }, []);
+
+  useEffect(() => {
+    const CartSummary = async () => {
+      try {
+        const res = await getCartSummary();
+        console.log(res, "CartSummary");
+        setCartSummary(res.data);
+      } catch (error) {
+        console.error("Error fetching payment options:", error);
+      }
+    };
+
+    CartSummary();
+  }, []);
+
+  console.log(data, "CartSummary");
   return (
     <div>
       <div className="flex justify-between flex-wrap xl:flex-nowrap xl:p-8 gap-10">
-        <div className="w-full xl:w-3/5 bg-white p-5">
+        <div className="w-full  xl:w-3/5 bg-white p-5">
           <h2 className="text-md xl:text-xl   font-semibold mb-4">
             Select a payment option
           </h2>
-          <div className="flex justify-center gap-5 items-center  flex-wrap  mb-6">
+          {/* <div className="flex justify-center gap-5 items-center  flex-wrap  mb-6">
             <div className=" mb-4   p-4 border border-gray-300 rounded-md text-center cursor-pointer">
               <Image
                 src={""}
@@ -42,6 +76,26 @@ const PaymentStep = () => {
                 Cash on Delivery
               </span>
             </div>
+          </div> */}
+
+          <div className="flex justify-center gap-5 items-center flex-wrap mb-6">
+            {paymentOption.map((option, i) => (
+              <div
+                key={i}
+                className="mb-4 p-4 border border-gray-300 rounded-md text-center cursor-pointer"
+              >
+                <Image
+                  src={option.image}
+                  width={100}
+                  height={100}
+                  alt={option.payment_type}
+                  className="mx-auto mb-2 w-auto h-10"
+                />
+                <span className="block text-sm font-medium">
+                  {option.title}
+                </span>
+              </div>
+            ))}
           </div>
 
           <div className="flex gap-2 xl:gap-10 justify-center items-center mb-10">
@@ -78,10 +132,16 @@ const PaymentStep = () => {
             </div>
             <div className="flex justify-between items-center mt-2  ">
               <div className="w-full justify-between items-center mt-5 flex ">
-                <p className="text-sm">
+                {/* <p className="text-sm">
                   HIW Hi-Waote 6F22 9 Volts High Power Long Life Batteries pack
                   5 × 2
-                </p>
+                </p> */}
+                //change to br
+                {data.data.map((ele, i) => (
+                  <p key={i} className="text-gray-500 ">
+                    {ele?.product_name}
+                  </p>
+                ))}
                 <span className="font-bold ml-2 xl:ml-0">₹153</span>
               </div>
             </div>
@@ -89,16 +149,16 @@ const PaymentStep = () => {
           <div className="mb-4 divide-y-2">
             <div className="flex justify-between py-1">
               <span className="font-medium">Subtotal</span>
-              <span>₹153</span>
+              <span>{data?.sub_total}</span>
             </div>
             <div className="flex justify-between mt-2 py-2">
-              <span className="font-medium">Total Shipping</span>
-              <span>₹35</span>
+              <span className="font-medium">Shipping Cost</span>
+              <span>{data?.shipping_cost}</span>
             </div>
           </div>
-          <div className="flex justify-between font-semibold  mb-4 py-1" >
+          <div className="flex justify-between font-semibold  mb-4 py-1">
             <span className="text-sm font-bold">TOTAL</span>
-            <span>₹188</span>
+            <span>{data.grand_total}</span>
           </div>
           <div className="flex">
             <input

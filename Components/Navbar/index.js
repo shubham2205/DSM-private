@@ -299,9 +299,9 @@ const Navbar = ({ carts, token, allCategory, wishlistData }) => {
                                   className="flex items-center mb-4 "
                                 >
                                   <Image
+                                    src={`${process.env.NEXT_PUBLIC_URL}/${ele?.product_thumbnail_image}`}
                                     width={500}
                                     height={500}
-                                    src={`${process.env.NEXT_PUBLIC_URL}/${ele?.product_thumbnail_image}`}
                                     alt="Product"
                                     className="w-12 h-12 object-cover"
                                   />

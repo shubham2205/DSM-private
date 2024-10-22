@@ -72,7 +72,7 @@ const OrderSteps = ({ carts, address, userId }) => {
         };
       case 4:
         return {
-          component: <PaymentStep />,
+          component: <PaymentStep data={carts} userId={userId} />,
           buttonText: "Continue to Confirmation",
         };
       case 5:

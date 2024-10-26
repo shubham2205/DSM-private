@@ -1,10 +1,10 @@
 import React from "react";
-import Confetti from "../confetti";
+// import Confetti from "../confetti";
 
 const ConfirmationStep = () => {
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
-      <Confetti />
+      {/* <Confetti /> */}
       <div className="text-center mb-6">
         <svg
           className="mx-auto mb-4 text-green-500 w-12 h-12"

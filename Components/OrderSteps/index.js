@@ -16,6 +16,7 @@ import PaymentStep from "../Stepper/PaymentStep";
 import ConfirmationStep from "../Stepper/ConfirmationStep";
 
 const OrderSteps = ({ carts, address, userId }) => {
+  console.log(carts , "Cart data")
   const [currentStep, setCurrentStep] = useState(1);
 
   const steps = [

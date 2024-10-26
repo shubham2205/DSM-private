@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import { icons } from "lucide-react";
 
 const CartStep = ({ data }) => {
+
+  // console.log(data , "data from cart step")
   const changeQuantity = async (proId, quantity) => {
     const formData = new FormData();
     formData.append("id", proId);
@@ -114,7 +116,8 @@ const CartStep = ({ data }) => {
                     Subtotal
                   </td>
                   <td className="border-t border-gray-200 p-2 text-right  font-semibold">
-                    ₹153
+                    {/* ₹15300 */}
+                    {data?.grand_total}
                   </td>
                 </tr>
               </React.Fragment>
@@ -124,15 +127,15 @@ const CartStep = ({ data }) => {
       </div>
 
       {/* -------------------- mobile-view------------ */}
-      <div className="lg:hidden bg-white shadow p-3">
+      {/* <div className="lg:hidden bg-white shadow p-3">
         <div className="flex gap-5">
-          {/* <Image
+          <Image
             width={700}
             height={700}
             src={""}
             alt="Product"
             className="w-16 h-16 object-cover mr-2 text-xs"
-          /> */}
+          />
           <p className="text-gray-500  text-xs">
             HIW Hi-Waote 6F22 9 Volts High Power Long Life Batteries pack 5
           </p>
@@ -165,7 +168,66 @@ const CartStep = ({ data }) => {
             </button>
           </div>
         </div>
+      </div> */}
+
+
+      {/* -------------------- mobile-view------------ */}
+<div className="lg:hidden bg-white shadow p-3">
+  {data?.data?.map((ele, i) => (
+    <React.Fragment key={i}>
+      <div className="flex gap-5">
+        <Image
+          width={700}
+          height={700}
+          src={`${process.env.NEXT_PUBLIC_URL}/${ele?.product_thumbnail_image}`}
+          alt="Product"
+          className="w-16 h-16 object-cover mr-2 text-xs"
+        />
+        <p className="text-gray-500 text-xs">
+          {ele?.product_name}
+        </p>
       </div>
+
+      <div className="flex gap-10 ">
+        <div className="price">
+          <p className="capitalize text-sm text-gray-500">Price</p>
+          <p className=" font-bold">{ele?.currency_symbol}{ele?.price}</p>
+        </div>
+        <div className="total">
+          <p className="capitalize text-sm text-gray-500 ">Total</p>
+          <p className="text-primary-red font-bold">{data?.grand_total}</p>
+        </div>
+      </div>
+
+      <div className="flex justify-between items-center mt-2 ">
+        <div className="flex justify-between items-center">
+          <button 
+            onClick={() => changeQuantity(ele?.id, ele?.quantity - 1)}
+            className="flex justify-center items-center bg-gray-300 p-2 rounded-full w-8 h-8 text-black"
+          >
+            −
+          </button>
+          <span className="mx-3 p-2 qty">{ele?.quantity}</span>
+          <button 
+            onClick={() => changeQuantity(ele?.id, ele?.quantity + 1)}
+            className="flex justify-center items-center bg-gray-300 p-2 rounded-full w-8 h-8 text-black"
+          >
+            +
+          </button>
+        </div>
+        <div className="">
+          <button 
+            onClick={() => removeCart(ele?.id)}
+            className=" bg-slate-900 p-2 rounded-full text-white hover:bg-primary-red transition-all"
+          >
+            <FaRegTrashAlt className="text-xs" />
+          </button>
+        </div>
+      </div>
+    </React.Fragment>
+  ))}
+</div>
+
     </div>
   );
 };

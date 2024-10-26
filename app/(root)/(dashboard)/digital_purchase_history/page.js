@@ -1,5 +1,3 @@
-// /dashboard/downloads/page.js
-
 import React from "react";
 import { PiSmileySad } from "react-icons/pi";
 

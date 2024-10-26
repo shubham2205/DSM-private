@@ -9,7 +9,7 @@ import { getData } from "../../lib/actions/universel.actions";
 import { cookiesData } from "../../lib/actions/auth.actions";
 import { getAllCards } from "../../lib/actions/cart.actions";
 import { getCategory } from "../../lib/actions/category.actions";
-import { getWishlist } from "../../lib/actions/wishlist.action";
+import { getUserWishlist } from "../../lib/actions/wishlist.action";
 
 const layout = async ({ children }) => {
   const userId = await cookiesData("userId");
@@ -20,8 +20,8 @@ const layout = async ({ children }) => {
   );
   const allCategoriesData = await getCategory();
   const allCarts = await getAllCards();
-  const wishlistData = await getWishlist();
-  // console.log("wishlistData2223 ::" ,wishlistData?.data?.length)
+  const wishlistData = async () => token && (await getUserWishlist());
+  // console.log("allCarts ::", allCarts);
   return (
     <>
       <div className="bg-defaultBg text-black relative">

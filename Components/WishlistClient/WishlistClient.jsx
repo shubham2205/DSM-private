@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import React, { useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
@@ -26,7 +28,7 @@ const WishlistClient = ({ wishlistData, userId, tag }) => {
       const result = await removeFromWishlist(productId);
       if (result?.success) {
         toast.success(result.message);
-        tag;  // This should trigger the revalidation of the wishlist
+        tag;  
       } else {
         toast.error("Failed to remove product from wishlist");
       }

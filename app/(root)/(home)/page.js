@@ -33,7 +33,7 @@ const Home = async () => {
   );
   const tag = revalidateTag("wishlist");
 
-  const checkWishlistItem = isProductInWishlist();
+  const checkWishlistItem = userId && (await isProductInWishlist());
 
   return (
     <main>

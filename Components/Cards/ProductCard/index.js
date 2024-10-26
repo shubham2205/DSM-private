@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { addToCard } from "../../../lib/actions/cart.actions";
 
 const ProductCard = ({ cardData, wid, tag, userId }) => {
-  // console.log(userId, "userId"); 
+  // console.log(userId, "userId");
 
   const [isItemInWishlist, setIsItemInWishlist] = useState(false);
 
@@ -40,12 +40,12 @@ const ProductCard = ({ cardData, wid, tag, userId }) => {
     e.stopPropagation();
 
     const url = `${process.env.NEXT_PUBLIC_API}/v3/carts/add`;
-    // console.log("URL:", url); 
+    // console.log("URL:", url);
 
     const formData = new FormData();
-    formData.append("user_id", userId); 
-    formData.append("id", cardData.id); 
-    formData.append("quantity", 1); 
+    formData.append("user_id", userId);
+    formData.append("id", cardData.id);
+    formData.append("quantity", 1);
     formData.append("variant", "");
     formData.append("login", 1);
     // console.log(formData, "FormData before API call");

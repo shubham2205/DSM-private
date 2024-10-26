@@ -13,8 +13,8 @@ const ProductCardWithOnlyName = ({ cardData }) => {
               width={500}
               height={500}
               className="w-full h-20 lg:h-32 object-contain"
-              src={`${process.env.NEXT_PUBLIC_URL}/${cardData.banner}`}
-              alt={cardData.description}
+              src={`${process.env.NEXT_PUBLIC_URL}/${cardData?.banner}`}
+              alt={cardData?.description || "Banner pic"}
             />
           </div>
           <div className="product-name text-center text-gray-500 pb-2">

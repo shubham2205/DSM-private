@@ -53,9 +53,7 @@ const DeliveryStep = ({ data }) => {
               alt="Product"
               className="w-12 h-12 mr-4 text-xs"
             />
-            <span className="text-gray-700  text-sm">
-              {ele?.product_name}
-            </span>
+            <span className="text-gray-700  text-sm">{ele?.product_name}</span>
           </div>
         ))}
 

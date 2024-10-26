@@ -29,7 +29,7 @@ const Product = async ({ params }) => {
   );
   const Tag = revalidateTag("wishlist");
 
-  const checkWishlistItem = isProductInWishlist();
+  const checkWishlistItem =await isProductInWishlist();
 
   return (
     <main>

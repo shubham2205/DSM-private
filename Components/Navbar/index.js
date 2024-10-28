@@ -479,7 +479,7 @@ const Navbar = ({ carts, token, allCategory, wishlistData }) => {
                     src={`${process.env.NEXT_PUBLIC_URL}/${
                       subCategory?.at(0)?.banner
                     }`}
-                    alt={hoveredCategory}
+                    alt={hoveredCategory || "hovered"}
                     className="w-full h-60"
                     width={900}
                     height={900}

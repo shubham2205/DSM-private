@@ -23,7 +23,7 @@ const AllCategoriesHoverCard = async ({ subid }) => {
                     }
                     width={90}
                     height={90}
-                    alt={data?.name}
+                    alt={data?.name || "icon"}
                     className="w-full"
                   />
                 </div>

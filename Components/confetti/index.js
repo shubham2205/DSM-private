@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import useWindowSize from "react-use/lib/useWindowSize";
-// import Confetti from "react-confetti";
+import Confetti from "react-confetti";
 
 const ConfettiComponent = () => {
   const { width, height } = useWindowSize();
@@ -20,13 +20,12 @@ const ConfettiComponent = () => {
   };
 
   return (
-    <></>
-    // <Confetti
-    //   width={width - 20}
-    //   height={height}
-    //   numberOfPieces={confettiPieces}
-    //   onConfettiComplete={handleConfettiComplete}
-    // />
+    <Confetti
+      width={100}
+      height={100}
+      numberOfPieces={confettiPieces}
+      onConfettiComplete={handleConfettiComplete}
+    />
   );
 };
 

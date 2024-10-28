@@ -20,7 +20,7 @@ const CategoryCard = ({ data }) => {
                       src={`${process.env.NEXT_PUBLIC_URL}/${item?.banner}`}
                       width={500}
                       height={500}
-                      alt={item?.name}
+                      alt={item?.name || "banner"}
                       className="w-auto h-full"
                     />
                   </div>

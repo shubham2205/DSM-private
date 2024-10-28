@@ -9,7 +9,7 @@ import BestSellerSection from "../../../Components/HomeComponents/BestSellerSect
 import TopCategories from "../../../Components/HomeComponents/Top12CategoriesSection/index";
 import TwoBanner from "../../../Components/HomeComponents/TwoBanner/index";
 import Top12Brands from "../../../Components/HomeComponents/Top12Brands/index";
-// import Confetti from "../../../Components/confetti/index";
+import Confetti from "../../../Components/confetti/index";
 import { getData } from "../../../lib/actions/universel.actions";
 import { revalidateTag } from "next/cache";
 import { isProductInWishlist } from "../../../lib/actions/wishlist.action";
@@ -39,7 +39,7 @@ const Home = async () => {
     <main>
       <div>
         <div className="!w-full">
-          {/* <Confetti /> */}
+          <Confetti />
         </div>
         <div className="bg-white">
           <HeroDropdown data={HomeCategories} />

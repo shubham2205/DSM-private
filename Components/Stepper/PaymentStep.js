@@ -168,7 +168,7 @@ const PaymentStep = ({ data, userId, company }) => {
                     src={option.image}
                     width={100}
                     height={100}
-                    alt={option.payment_type}
+                    alt={option.payment_type || "options"}
                     className="mx-auto mb-2 w-auto h-10 object-contain"
                   />
                   <span className="block text-sm font-medium">

@@ -31,7 +31,7 @@ const Categories = async () => {
                       scr={`${process.env.NEXT_PUBLIC_URL}/${data?.icon}`}
                       width={80}
                       height={80}
-                      alt={data?.name}
+                      alt={data?.name || "icon"}
                       className="w-full h-full"
                     />
                   </div>

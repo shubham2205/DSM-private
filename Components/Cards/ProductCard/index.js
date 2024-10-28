@@ -85,7 +85,7 @@ const ProductCard = ({ cardData, wid, tag, userId }) => {
               height={500}
               className="w-full h-full object-contain"
               src={`${process.env.NEXT_PUBLIC_URL}/${cardData?.thumbnail_image}`}
-              alt={cardData?.name}
+              alt={cardData?.name || "thumbnail"}
             />
           </div>
         </div>

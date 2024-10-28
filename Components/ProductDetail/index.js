@@ -380,7 +380,7 @@ const ProductDetail = ({
                     src={`${process.env.NEXT_PUBLIC_URL}/${ele?.thumbnail_image}`}
                     width={80}
                     height={80}
-                    alt={ele?.name}
+                    alt={ele?.name || "element"}
                     className="w-40 h-32 object-contain mb-4 "
                   />
                   <div className="w-60">

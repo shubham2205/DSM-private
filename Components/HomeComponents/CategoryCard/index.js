@@ -34,7 +34,7 @@ const CategoryCard = ({ data }) => {
             width={500}
             height={500}
             src={`${process.env.NEXT_PUBLIC_URL}/${data?.icon}`}
-            alt={data?.name}
+            alt={data?.name || "icon"}
             className="w-full h-full text-xs rounded-full"
           />
         </div>

@@ -156,7 +156,7 @@ const AddToCartPopUp = ({
                       <div key={i}>
                         <Image
                           key={"preview-" + i}
-                          src={item.src || ""}
+                          src={item.src || "img"}
                           alt="previews"
                           width={100}
                           height={100}

@@ -46,7 +46,7 @@ const TodayDealSection = ({ data, banner, loading }) => {
                 width={500}
                 height={500}
                 className="w-full "
-                alt={`Image ${index}`}
+                alt={`Image ${index}` || "imgSrc"}
               />
             </div>
           ))}

@@ -8,7 +8,7 @@ import ProductCardWithOnlyName from "../../Cards/ProductCardWithOnlyName";
 
 const SliderWithPName = ({ data }) => {
   return (
-    <div className="w-full    ">
+    <div className="w-full">
       <div>
         <SliderPerview3 slidepre={8} spacebet={20}>
           {data &&

@@ -18,7 +18,7 @@ const ProductCardWithOnlyName = ({ cardData }) => {
             />
           </div>
           <div className="product-name text-center text-gray-500 pb-2">
-            <p className="text-[0.60rem] lg:text-sm">{cardData.name}</p>
+            <p className="text-[0.60rem] lg:text-sm">{cardData?.name}</p>
           </div>
         </div>
       </div>

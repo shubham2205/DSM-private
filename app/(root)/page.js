@@ -1,26 +1,26 @@
 import React from "react";
-import HeroDropdown from "../../../Components/HomeComponents/HeroHoverDropdown/index";
-import Banners from "../../../Components/HomeComponents/Banners/index";
-import SliderWithPName from "../../../Components/HomeComponents/SliderWithPName/index";
-import FeatureCardSlider from "../../../Components/HomeComponents/FeatureCardSlider/index";
-import HomeBanner from "../../../Components/HomeComponents/HomeBannerSlider/index";
-import TodayDealSection from "../../../Components/HomeComponents/TodayDealSection/index";
-import BestSellerSection from "../../../Components/HomeComponents/BestSellerSection/index";
-import TopCategories from "../../../Components/HomeComponents/Top12CategoriesSection/index";
-import TwoBanner from "../../../Components/HomeComponents/TwoBanner/index";
-import Top12Brands from "../../../Components/HomeComponents/Top12Brands/index";
-import Confetti from "../../../Components/confetti/index";
-import { getData } from "../../../lib/actions/universel.actions";
+import HeroDropdown from "../../Components/HomeComponents/HeroHoverDropdown/index";
+import Banners from "../../Components/HomeComponents/Banners/index";
+import SliderWithPName from "../../Components/HomeComponents/SliderWithPName/index";
+import FeatureCardSlider from "../../Components/HomeComponents/FeatureCardSlider/index";
+import HomeBanner from "../../Components/HomeComponents/HomeBannerSlider/index";
+import TodayDealSection from "../../Components/HomeComponents/TodayDealSection/index";
+import BestSellerSection from "../../Components/HomeComponents/BestSellerSection/index";
+import TopCategories from "../../Components/HomeComponents/Top12CategoriesSection/index";
+import TwoBanner from "../../Components/HomeComponents/TwoBanner/index";
+import Top12Brands from "../../Components/HomeComponents/Top12Brands/index";
+import Confetti from "../../Components/confetti/index";
+import { getData } from "../../lib/actions/universel.actions";
 import { revalidateTag } from "next/cache";
-import { isProductInWishlist } from "../../../lib/actions/wishlist.action";
-import { cookiesData } from "../../../lib/actions/auth.actions";
+import { isProductInWishlist } from "../../lib/actions/wishlist.action";
+import { cookiesData } from "../../lib/actions/auth.actions";
 
 const Home = async () => {
   const userId = await cookiesData("userId");
-  const homeData = await getData(`${process.env.NEXT_PUBLIC_API}/v3/home`);
   const featuredData = await getData(
     `${process.env.NEXT_PUBLIC_API}/v3/categories/featured`
   );
+  const homeData = await getData(`${process.env.NEXT_PUBLIC_API}/v3/home`);
   const todayDeal = await getData(
     `${process.env.NEXT_PUBLIC_API}/v3/products/todays-deal`
   );
@@ -46,9 +46,9 @@ const Home = async () => {
           {/* <HeroDropdown data={homeData?.data?.category} /> */}
           <HomeBanner data={homeData?.data?.banners?.data?.slider1_images} />
         </div>
-        <SliderWithPName data={featuredData?.data} />
+        <SliderWithPName data={featuredData?.data || []} />
         <TodayDealSection
-          data={todayDeal?.data}
+          data={todayDeal?.data || []}
           banner={homeData?.data?.banners?.data?.banner1}
         />
         <FeatureCardSlider
